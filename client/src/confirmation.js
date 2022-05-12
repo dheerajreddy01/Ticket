@@ -4,9 +4,6 @@ import './App.css'
 import { useNavigate } from 'react-router-dom'
 export default function Confirmation(){
 
-
-  
-
 const Ref = useRef(null);
 const [timer, setTimer] = useState('00:00:00');
 
