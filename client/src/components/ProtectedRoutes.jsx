@@ -11,7 +11,7 @@ const useAuth=() =>{
     if(res){
     const user ={LoggedIn:true}
     const log=JSON.parse(res)
-    console.log(JSON.parse(res))
+    
     console.log(log.name)
   
     return user && user.LoggedIn;

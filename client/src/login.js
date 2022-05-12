@@ -50,7 +50,7 @@ function Login() {
         // console.log(result.data)
        result =await result.json();
         // localStorage.setItem("user",JSON.stringify(result.user))
-        console.log(result)
+       
         if(result.flag2==="true")
         {
           <Alert variant="success">Login Successful</Alert>
