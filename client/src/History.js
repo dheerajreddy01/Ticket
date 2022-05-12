@@ -9,8 +9,7 @@ function History(){
             try{
               const res = await fetch("http://127.0.0.1:5000/history");
               const result = await res.json();
-              setData(result.history);
-              console.log(data)
+              setData(result.history)
             }catch(error){
               console.log(error) 
             }
@@ -43,26 +42,36 @@ function History(){
 		<div className="bp-card_content">
 			<p className="secondary">Movie</p>
 			<h4>{item.moviename}</h4>
-			
-			
-			<ul>
-				
-					<li>
-					<span>{item.seats}</span>	
-					</li>
-					<li>
-						{item.date}
-					</li>
-					<li>
-						{item.name}
-					</li>
-          <li>
-            <p className='barcode'></p>
-          </li>
-			</ul>
+      <ul>
+        <li>
+      <p className='secondary'>Seats</p>
+      <span>{item.seats}</span>
+      </li>
+      <li>
+      <p className='secondary'>Time</p>
+      {item.time}
+      </li>
+      <li>
+      <p className='secondary'>Theatre</p>
+      {item.location}
+      </li>
+</ul>
+<ul>
+  <li>
+<p className='secondary'>Booked</p>
+<span>{item.date}</span>
+</li>
+<li>
+<p className='secondary'>Booked</p>
+<span>{item.name}</span>
+</li>
+</ul>
+
 			
 			<a href="" className="price">
 				Rs {item.price}/-
+			</a>
+      <a href="" className='barcode'>
 			</a>
 			
       

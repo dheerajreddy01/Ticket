@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import { Link,useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './App.css'
 export default function Seats(){
     const [data, setData] = useState([]);
@@ -136,6 +136,7 @@ navigate('/confirmation')
   }
 }
 const main=()=>{
+  navigate('/main')
   localStorage.removeItem("seatsSelected")
   localStorage.removeItem("cart")
   localStorage.removeItem("price")
@@ -174,7 +175,7 @@ const main=()=>{
                     </div>
             <div className='row'><p>Total price of tickets:{price} Rs</p></div>
             <div>
-            <Link className='route' to="/main" onClick={main}>Back</Link>
+            <button className='route' onClick={main}>Back</button>
          <button className='route' onClick={blockSeats}>Confirm</button>
                
             

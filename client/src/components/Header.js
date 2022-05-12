@@ -31,6 +31,18 @@ const Header = () => {
 		localStorage.clear();
 		window.location.reload(true);
 	  };
+	  const home=()=>{
+		localStorage.removeItem("cart")
+		localStorage.removeItem("movie_name")
+		localStorage.removeItem("movie_id")
+		localStorage.removeItem("show_time")
+		localStorage.removeItem("show_id")
+		localStorage.removeItem("theatre_name")
+		localStorage.removeItem("theatre_id")
+		localStorage.removeItem("seats_wanted")
+		localStorage.removeItem("price")
+		localStorage.removeItem("seatsSelected")
+	  }
 
 	// const username=()=>{
 	// 	const user=localStorage.getItem('user.name')
@@ -44,10 +56,10 @@ return (
 	 <Bars/>
 
 		<NavMenu>
-		<NavLink to='/' activeStyle>
+		<NavLink onClick={home} to='/' activeStyle>
 			Home
 		</NavLink>
-		<NavLink to='/contact' activeStyle>
+		<NavLink onclick={home} to='/contact' activeStyle>
 			Contact
 		</NavLink>
 		<NavLink to='/main' activeStyle>
