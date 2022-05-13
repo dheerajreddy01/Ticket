@@ -72,7 +72,7 @@ return (
 			<NavDropdown.Item onSelect={handleLogout}>Logout</NavDropdown.Item>
 			
 			</NavDropdown> */}
-			<NavLink  to='/history' activeStyle>
+			<NavLink onclick={home} to='/history' activeStyle>
 			Purchase History
 		</NavLink>
         <NavLink onClick={handleLogout} to='/login' activeStyle>

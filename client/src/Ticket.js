@@ -30,9 +30,19 @@ const home=()=>{
   localStorage.removeItem("price")
   localStorage.removeItem("seatsSelected")
 }
+function printDiv() 
+{
+ 
+ var printContents = document.getElementById("print").innerHTML;
+ var originalContents = document.body.innerHTML;
+ document.body.innerHTML = printContents;
+ window.print();
+ document.body.innerHTML = originalContents;
+}
+
   return (
     <>
-<div className="contenido">
+<div className="contenido" id='print'>
   <div className="ticket">
     <div className="hqr">
       <div className="column left-one"></div>
@@ -92,13 +102,12 @@ const home=()=>{
       </div> 
         </div>
         <div className="link">
-        <button onClick={() => window.print()}>PRINT</button>
+        <button onClick={printDiv}>PRINT</button>
       </div>
       
       </div>
       
     </div>
-    
   </div>
 
   <div className="link">
