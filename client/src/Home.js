@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { MdKeyboardArrowRight } from 'react-icons/md';
-import BgImg from './assets/img1.jpeg';
+import BgImg from './assets/bg-image.jpg';
 const Section = styled.section`
 background-image: url(${BgImg});
   height: 900px;
   width:100%;
+  
   display: block;
   
   background-repeat: no-repeat;
@@ -24,9 +25,32 @@ padding-top: 100px;
 `;
 
 const Title = styled.p`
-  font-size: 8vw;
-  color: #2feded  ;
-  font-weight: 400;
+text-transform: uppercase;
+background-image: linear-gradient(
+  -225deg,
+  #231557 0%,
+  #44107a 29%,
+  #ff1361 67%,
+  #fff800 100%
+);
+background-size: auto auto;
+background-clip: border-box;
+background-size: 200% auto;
+font-family: "Times New Roman", Times, serif;
+color: #fff;
+background-clip: text;
+text-fill-color: transparent;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+animation: textclip 2s linear infinite;
+display: inline-block;
+    font-size: 100px;
+
+    @keyframes textclip {
+      to {
+        background-position: 200% center;
+      }
+    }
 `;
 
 
