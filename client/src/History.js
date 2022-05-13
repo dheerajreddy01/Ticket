@@ -62,8 +62,8 @@ function History(){
 <span>{item.date}</span>
 </li>
 <li>
-<p className='secondary'>Booked</p>
-<span>{item.name}</span>
+<p className='secondary'>Name</p>
+  {item.name}
 </li>
 </ul>
 

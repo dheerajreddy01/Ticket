@@ -5,6 +5,7 @@ import Confirmation from './confirmation';
 import Main from './main';
 import Seats from './seats';
 import Registration from './register';
+import SubProtectedRoutes from './components/SubProtectedRoutes';
 import Login from './login';
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
 import Navbar from './components/Header';
@@ -15,13 +16,7 @@ import Contact from './contact';
 import History from './History';
 import Ticket from './Ticket';
 function App() {
- 
-
-
- 
   return (
-    
-   
    <Router>
       <Navbar/>
       <Routes>
@@ -33,13 +28,13 @@ function App() {
         
         <Route element={<ProtectedRoutes/>}>
         <Route path="/main" element={<Main/>}/>
+        <Route element ={<SubProtectedRoutes/>}>
         <Route path="/seats" element={<Seats/>}/>
+        </Route>
         <Route path="/confirmation" element={<Confirmation/>}/>
         <Route path="/history" element={<History/>}/>
         <Route path="/ticket" element={<Ticket/>}/>
-     
         </Route>
-       
       </Routes>
     </Router> 
 

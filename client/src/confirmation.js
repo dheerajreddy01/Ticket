@@ -44,10 +44,16 @@ const startTimer = (e) => {
   }).then(response => response.json())
   .catch(error => console.log(error))
 }
-localStorage.removeItem('cart');
-localStorage.removeItem('price');
-localStorage.removeItem("seats_wanted")
-localStorage.removeItem("seatsSelected")
+    localStorage.removeItem("cart")
+		localStorage.removeItem("movie_name")
+		localStorage.removeItem("movie_id")
+		localStorage.removeItem("show_time")
+		localStorage.removeItem("show_id")
+		localStorage.removeItem("theatre_name")
+		localStorage.removeItem("theatre_id")
+		localStorage.removeItem("seats_wanted")
+		localStorage.removeItem("price")
+		localStorage.removeItem("seatsSelected")
 navigate("/main")
   }
 }
@@ -89,6 +95,7 @@ const navigate=useNavigate();
       var movie  =localStorage.getItem('movie_name')
       var time1=localStorage.getItem("show_time")
       var location1=localStorage.getItem("theatre_name")
+
   function updateSeats(){
     let seats=[]
     for(var j=0;j<cart.length;j++){
@@ -158,6 +165,35 @@ const navigate=useNavigate();
   clearInterval(Ref.current);
   navigate("/seats")
 }   
+window.onbeforeunload = function(){
+  for (var i = 0; i < cart.length; i++) {
+  const available= cart[i].id;
+  const occupied=!cart[i].occupied
+  const user=log.id
+  const data={available,occupied,user}
+  
+  fetch(`http://127.0.0.1:5000/delete`,{
+  method:"POST",
+  headers:{
+  'Content-Type':'application/json'
+          },
+  body:JSON.stringify(data)
+}).then(response => response.json())
+.catch(error => console.log(error))
+}
+localStorage.removeItem("cart")
+localStorage.removeItem("movie_name")
+localStorage.removeItem("movie_id")
+localStorage.removeItem("show_time")
+localStorage.removeItem("show_id")
+localStorage.removeItem("theatre_name")
+localStorage.removeItem("theatre_id")
+localStorage.removeItem("seats_wanted")
+localStorage.removeItem("price")
+localStorage.removeItem("seatsSelected")
+clearInterval(Ref.current);
+
+}
     return(
         <div className='conf-des'>
                  <div className ='conf'>

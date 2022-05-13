@@ -73,7 +73,7 @@ return (
 			
 			</NavDropdown> */}
 			<NavLink  to='/history' activeStyle>
-			OrderHistory
+			Purchase History
 		</NavLink>
         <NavLink onClick={handleLogout} to='/login' activeStyle>
 			Logout

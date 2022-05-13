@@ -137,9 +137,16 @@ navigate('/confirmation')
 }
 const main=()=>{
   navigate('/main')
-  localStorage.removeItem("seatsSelected")
   localStorage.removeItem("cart")
+  localStorage.removeItem("movie_name")
+  localStorage.removeItem("movie_id")
+  localStorage.removeItem("show_time")
+  localStorage.removeItem("show_id")
+  localStorage.removeItem("theatre_name")
+  localStorage.removeItem("theatre_id")
+  localStorage.removeItem("seats_wanted")
   localStorage.removeItem("price")
+  localStorage.removeItem("seatsSelected")
 }
 
   return(
@@ -148,7 +155,7 @@ const main=()=>{
      
      <div className='screen'></div>
             <div className='box'>
-             <div className='row'>
+             <div className='rows'>
              {
                  data.map((item)=>
                   <>
@@ -173,7 +180,7 @@ const main=()=>{
                     {cart && cart.map((item)=><p className='selected on' key={item.id}  >{item.name}
                     </p>)}
                     </div>
-            <div className='row'><p>Total price of tickets:{price} Rs</p></div>
+            <div className='rows'><p>Total price of tickets:Rs {price} /-</p></div>
             <div>
             <button className='route' onClick={main}>Back</button>
          <button className='route' onClick={blockSeats}>Confirm</button>
