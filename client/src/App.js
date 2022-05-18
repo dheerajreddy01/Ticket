@@ -15,10 +15,13 @@ import Logout from './Logout'
 import Contact from './contact';
 import History from './History';
 import Ticket from './Ticket';
+
 function App() {
   return (
    <Router>
       <Navbar/>
+      
+
       <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/contact" element={<Contact/>}/>

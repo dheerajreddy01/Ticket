@@ -19,34 +19,94 @@ const Header = () => {
 
 	const [navbarUserIsLogged, setnavbarUserIsLogged] = useState(false);
 	useEffect(() => {
-	  (async () => {
 		const loggedIn = localStorage.getItem('user')
 		if (loggedIn) setnavbarUserIsLogged(true);
-	  })();
 	}, [navbarUserIsLogged]);
+	
 	const handleLogout = () => {
-		// setUser({});
-		// setUsername("");
-		// setPassword("");
-		localStorage.clear();
-		window.location.reload(true);
-	  };
-	  const home=()=>{
-		localStorage.removeItem("cart")
-		localStorage.removeItem("movie_name")
-		localStorage.removeItem("movie_id")
-		localStorage.removeItem("show_time")
-		localStorage.removeItem("show_id")
-		localStorage.removeItem("theatre_name")
-		localStorage.removeItem("theatre_id")
-		localStorage.removeItem("seats_wanted")
-		localStorage.removeItem("price")
-		localStorage.removeItem("seatsSelected")
-	  }
+		var res=localStorage.getItem("user")
+		const log=JSON.parse(res)
+		var cart1=localStorage.getItem("cart")
+		const cart=JSON.parse(cart1)
+		var confirm=localStorage.getItem("confirm")
+		
+		if(confirm){
+			for (var i = 0; i < cart.length; i++) {
+				const available= cart[i].id;
+				const occupied=!cart[i].occupied;
+				const user=log.id;
+				const data={available,occupied,user}
+				fetch(`http://127.0.0.1:5000/delete`,{
+				method:"POST",
+				headers:{
+				'Content-Type':'application/json'
+						},
+				body:JSON.stringify(data)
+			}).then(response => response.json())
+			.catch(error => console.log(error))
+		  }
+		  localStorage.clear()
 
-	// const username=()=>{
-	// 	const user=localStorage.getItem('user.name')
-	// }
+	setnavbarUserIsLogged(false);
+		}else{
+			localStorage.clear();
+			setnavbarUserIsLogged(false);
+		}
+		
+	  };
+
+	  const handleLogin=()=>{
+		const loggedIn = localStorage.getItem('user')
+		if(loggedIn) setnavbarUserIsLogged(true)
+		
+	  }
+	  const home=()=>{
+		var res=localStorage.getItem("user")
+		const log=JSON.parse(res)
+		var cart1=localStorage.getItem("cart")
+		const cart=JSON.parse(cart1)
+		var confirm=localStorage.getItem("confirm")
+		if(!confirm && !cart){
+			localStorage.removeItem("cart")
+			localStorage.removeItem("movie_name")
+			localStorage.removeItem("movie_id")
+			localStorage.removeItem("show_time")
+			localStorage.removeItem("show_id")
+			localStorage.removeItem("theatre_name")
+			localStorage.removeItem("theatre_id")
+			localStorage.removeItem("seats_wanted")
+			localStorage.removeItem("price")
+			localStorage.removeItem("seatsSelected")
+	  }
+	else{
+		for (var i = 0; i < cart.length; i++) {
+			const available= cart[i].id;
+			const occupied=!cart[i].occupied;
+			const user=log.id;
+			const data={available,occupied,user}
+			fetch(`http://127.0.0.1:5000/delete`,{
+			method:"POST",
+			headers:{
+			'Content-Type':'application/json'
+					},
+			body:JSON.stringify(data)
+		}).then(response => response.json())
+		.catch(error => console.log(error))
+	  }
+	  localStorage.removeItem("cart")
+localStorage.removeItem("movie_name")
+localStorage.removeItem("movie_id")
+localStorage.removeItem("show_time")
+localStorage.removeItem("show_id")
+localStorage.removeItem("confirm")
+localStorage.removeItem("theatre_name")
+localStorage.removeItem("theatre_id")
+localStorage.removeItem("seats_wanted")
+localStorage.removeItem("price")
+localStorage.removeItem("seatsSelected")
+	}
+}
+	
 return (
 	<>
 	<Nav>
@@ -59,20 +119,15 @@ return (
 		<NavLink onClick={home} to='/' activeStyle>
 			Home
 		</NavLink>
-		<NavLink onclick={home} to='/contact' activeStyle>
+		<NavLink onClick={home} to='/contact' activeStyle>
 			Contact
 		</NavLink>
-		<NavLink to='/main' activeStyle>
+		<NavLink onClick={home} to='/main' activeStyle>
 			Book
 		</NavLink>
-		{navbarUserIsLogged?
+		{navbarUserIsLogged===true?
         <>
-		{/* <NavDropdown title='Dropdown'>
-			<NavDropdown.Item onSelect={username} to="/login">Welcome $user</NavDropdown.Item>
-			<NavDropdown.Item onSelect={handleLogout}>Logout</NavDropdown.Item>
-			
-			</NavDropdown> */}
-			<NavLink onclick={home} to='/history' activeStyle>
+			<NavLink onClick={home} to='/history' activeStyle>
 			Purchase History
 		</NavLink>
         <NavLink onClick={handleLogout} to='/login' activeStyle>
@@ -80,11 +135,11 @@ return (
 		</NavLink>
 
         </>:<>
-        <NavLink to='/register' activeStyle>
+        <NavLink to='/register'onClick={handleLogin} activeStyle>
 			Sign Up
 		</NavLink>
         <NavBtn>
-		<NavBtnLink to='/login'>Sign In</NavBtnLink>
+		<NavBtnLink to='/login' onClick={handleLogin}>Sign In</NavBtnLink>
 		</NavBtn>
         </>
         }

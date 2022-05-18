@@ -1,13 +1,20 @@
 import React,{useEffect,useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import './App.css'
+import { useAlert } from "react-alert";
+import axios from 'axios';
+
+
+
 export default function Seats(){
+
     const [data, setData] = useState([]);
-   
+    const alert=useAlert()
     const navigate=useNavigate();
+    
  
     const getDatafromLS=()=>{                                             
-      const data=localStorage.getItem('cart');                            //state ,setState   date=[], setDate(data.se)
+      const data=localStorage.getItem('cart');                            
      
       if(data){
         return JSON.parse(data)
@@ -41,9 +48,11 @@ export default function Seats(){
         const movie=localStorage.getItem('movie_id')
         const theatre=localStorage.getItem("theatre_id")
         const show=localStorage.getItem("show_id")
-        const res = await fetch("http://127.0.0.1:5000/seats/movieId/"+movie+"/theatreid/"+theatre+"/showid/"+show)
-        const data = await res.json();
-        setData(data.seats);
+        await axios.get("http://127.0.0.1:5000/seats/movieId/"+movie+"/theatreid/"+theatre+"/showid/"+show).then((response)=>{
+          setData(response.data.seats);
+        })
+        // const data = await res.json();
+        // setData(data.seats);
       }catch(error){
         console.log(error) 
       }
@@ -56,6 +65,7 @@ export default function Seats(){
     }, [cart,price,seat_selected]);
 
     let seats_wanted=localStorage.getItem("seats_wanted")
+    
     const addDevice=(e,data)=>{
       
       const checkTicket=cart.filter((item)=>item.id===data.id);
@@ -70,7 +80,7 @@ export default function Seats(){
           e.target.style.background="red"
           localStorage.getItem("cart")
           data.occupied=true
-          // data.selected_users=name
+          
           setCart([...cart, data]);
           setSeatselected(seat_selected+1)
           console.log(data.occupied=true)
@@ -78,7 +88,7 @@ export default function Seats(){
         
         }
         else{
-          alert("exceeded the number of seats wanted")
+          alert.show("exceeded number of seats", { type: "error" });
         }
       }
     }
@@ -88,7 +98,7 @@ export default function Seats(){
       
       if(seat_selected<seats_wanted){
         //giving a warning to the user that the seats are less in number
-              alert("user has selected less number of seats")   
+              alert.show("user has selected less number of seats",{type:"error"});   
       }
       else{
         let check=0
@@ -126,12 +136,12 @@ if(check===0){
 navigate('/confirmation')
     }
     else{
-      window.confirm("seats already booked");
+      alert.show("seats already booked",{type:' error'});
       localStorage.removeItem("cart");
       localStorage.removeItem("price");
       localStorage.removeItem("seatsSelected")
       localStorage.removeItem('seatsWanted')
-      navigate('/main')
+      navigate("/seats")
     }
   }
 }
@@ -180,7 +190,7 @@ const main=()=>{
                     {cart && cart.map((item)=><p className='selected on' key={item.id}  >{item.name}
                     </p>)}
                     </div>
-            <div className='rows'><p>Total price of tickets:Rs {price} /-</p></div>
+            <div className='rows'><p>Total price of tickets:Rs { price} /-</p></div>
             <div>
             <button className='route' onClick={main}>Back</button>
          <button className='route' onClick={blockSeats}>Confirm</button>

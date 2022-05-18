@@ -1,11 +1,24 @@
 import React,{useState,useRef,useEffect} from 'react'
- 
+
 import './App.css'
 import { useNavigate } from 'react-router-dom'
+import { useAlert } from 'react-alert';
+
+
 export default function Confirmation(){
 
+
+  const alert=useAlert();
 const Ref = useRef(null);
 const [timer, setTimer] = useState('00:00:00');
+
+var confirm="ok"
+localStorage.setItem("confirm",JSON.stringify(confirm))
+const preback=()=>{
+  window.history.forward();
+}
+setTimeout(preback(),0);
+window.onunload=function(){ return null};
 
 const getTimeRemaining = (e) => {
   const total = Date.parse(e) - Date.parse(new Date());
@@ -101,9 +114,8 @@ const navigate=useNavigate();
     for(var j=0;j<cart.length;j++){
       seats[j]=cart[j].name
     }
-        for (var i = 0; i < cart.length; i++) {
+      for (var i = 0; i < cart.length; i++) {
         const id= cart[i].id;
-        
          const occupied=cart[i].occupied;
          const user=log.id
          const data={occupied,user}
@@ -136,8 +148,8 @@ const navigate=useNavigate();
   .catch(error => console.log(error))
 
   clearInterval(Ref.current);
-  window.confirm("Seats Reserved Successfully")
-//storing time 
+  alert.show("Seats Reserved Successfully",{type:"success"})
+  localStorage.removeItem("confirm")
 
   navigate("/ticket")
       }
@@ -145,7 +157,6 @@ const navigate=useNavigate();
 
       function deleteblock(){
         for (var i = 0; i < cart.length; i++) {
-          
         const available= cart[i].id;
         const occupied=!cart[i].occupied;
         const user=log.id;
@@ -159,6 +170,7 @@ const navigate=useNavigate();
     }).then(response => response.json())
     .catch(error => console.log(error))
   }
+  localStorage.removeItem("confirm")
   localStorage.removeItem("cart")
   localStorage.removeItem("price")
   localStorage.removeItem('seatsSelected')
@@ -186,6 +198,7 @@ localStorage.removeItem("movie_name")
 localStorage.removeItem("movie_id")
 localStorage.removeItem("show_time")
 localStorage.removeItem("show_id")
+localStorage.removeItem("confirm")
 localStorage.removeItem("theatre_name")
 localStorage.removeItem("theatre_id")
 localStorage.removeItem("seats_wanted")

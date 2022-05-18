@@ -1,35 +1,18 @@
 import React, { useState } from "react";
-import  Alert  from "react-bootstrap/Alert";
-import {Link,Navigate} from "react-router-dom"
-import {useNavigate} from "react-router-dom";
-
-
+import {Link,useNavigate} from "react-router-dom"
+import { useAlert } from "react-alert";
 function Login() {
     const [email, setEmaillog] = useState(" ");
     const [password, setPasswordlog] = useState(" ");
-    // const [name, setName] = useState("");
-    const [flag, setFlag] = useState(false);
-    // const [user, setUser] = useState();
-    const [home, setHome] = useState(true);
-    const navigate=useNavigate();
   
+
+    const navigate=useNavigate();
+    const alert = useAlert(); 
     
   
     async function handleLogin(e) {
       e.preventDefault();
-      
-      
-  
-      if ( !email || !password) {
-        setFlag(true);
-        localStorage.setItem("Email", JSON.stringify(email));
-       
-        console.log("login Successful Saved in Local Storage");
-      } else {
-        setFlag(false);
-        setHome(!home);
-    }
-  
+
   
       let data={email,password}
       try{
@@ -41,51 +24,41 @@ function Login() {
             'Content-type':'application/json'
           },
           body:JSON.stringify(data)  
-          // body: await result.JSON.stringify(data),
+         
         });
-        // // set the state of the user
-        // setUser(result.data)
-        // // store the user in localStorage
-        // localStorage.setItem('user', result.data)
-        // console.log(result.data)
        result =await result.json();
-        // localStorage.setItem("user",JSON.stringify(result.user))
-       
-        if(result.flag2==="true")
+
+      if((await result).status ===400)
         {
-          <Alert variant="success">Login Successful</Alert>
-          navigate("/")
-          localStorage.setItem("user",JSON.stringify(result.user))  
-          window.location.reload(true);
-          // changes
-          setHome(home);
+        
+          alert.show(result.message, { type: "error" });
+          
         }
         else{
-          alert(result.message)
-         
-          setHome(!home);
+          alert.show("Logged-In Success", { type: "success" });
+          navigate("/")
+          localStorage.setItem("user",JSON.stringify(result.user))  
+          // setnavbarUserIsLogged(true)
+          window.location.reload(true);
+
         }
+       
         
       }
-    //    <div><Navigate to="/main"/></div>
+  
         
       catch(e){
         console.log(e)
       }
-    // setHome(!home);
+
    
   }
-  
-  // if (user) {
-  //   return <div>{user.email} is loggged in</div>;
-  // }
 
  
 
   return (
-   
+   <>
     <div className="login-page">
-      {home ? (
         <form className="form" onSubmit={handleLogin}>
 
         <div className="login">
@@ -97,6 +70,7 @@ function Login() {
             <input
               type="email"
               placeholder="Enter email"
+              required
               onChange={(event) => setEmaillog(event.target.value)}
             />
           </div>
@@ -105,6 +79,7 @@ function Login() {
             <input
               type="password"
               placeholder="Enter password"
+              required
               onChange={(event) => setPasswordlog(event.target.value)}
             />
           </div>
@@ -113,18 +88,11 @@ function Login() {
             Login
           </button>
           <Link to="/register">Don't Have an account?</Link>
-          {flag && (
-            <Alert color="primary" variant="warning">
-              Fill correct Info else keep trying.
-            </Alert>
-          )}
-        </form>
-       ) : (
-        <Navigate to="/"/>
-        
-      )} 
+          
+      </form>
       
     </div>
+    </>
   );
 }
 

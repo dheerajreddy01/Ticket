@@ -6,7 +6,7 @@ const Section = styled.section`
 background-image: url(${BgImg});
   height: 900px;
   width:100%;
-  
+  git
   display: block;
   
   background-repeat: no-repeat;
