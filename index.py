@@ -208,7 +208,7 @@ def delete():
      seat = Seats.query.get(available)
      seat.occupied=request.json['occupied']
      db.session.commit()
-     db.session.query(Slot).filter(Slot.user==user).delete()   
+     db.session.query(Slot).filter(Slot.user==user,Slot.available==available).delete()   
      db.session.commit()
      return jsonify({"status": 200, "message": "updated"})
 
@@ -308,12 +308,12 @@ def login():
                 session['logged_in'] = True
                 session['email'] = user.email 
                 session['username'] = user.username
-                return jsonify({'user': user.serialize(),'message':"login Successful","flag2":"true"}), 200
+                return jsonify({'user': user.serialize(),'message':"login Successful"}), 200
             else:
                 # if password is in correct , redirect to login page
-                return jsonify({"message": "user password wrong", "status": 400})
+                return jsonify({"message": "user password wrong", "status": 400}),400
         else:
-            return jsonify({"message": "user details doesnt exist", "status": 400,"flag2":"false"})
+            return jsonify({"message": "user details doesnt exist", "status": 400}),400
 
   
 
