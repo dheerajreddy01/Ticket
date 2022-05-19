@@ -141,7 +141,7 @@ navigate('/confirmation')
       localStorage.removeItem("price");
       localStorage.removeItem("seatsSelected")
       localStorage.removeItem('seatsWanted')
-      navigate("/seats")
+      navigate('/main')
     }
   }
 }

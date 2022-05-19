@@ -14,11 +14,8 @@ const [timer, setTimer] = useState('00:00:00');
 
 var confirm="ok"
 localStorage.setItem("confirm",JSON.stringify(confirm))
-const preback=()=>{
-  window.history.forward();
-}
-setTimeout(preback(),0);
-window.onunload=function(){ return null};
+
+
 
 const getTimeRemaining = (e) => {
   const total = Date.parse(e) - Date.parse(new Date());
@@ -44,20 +41,25 @@ const startTimer = (e) => {
   }
   else{
     clearInterval(Ref.current);
-    for (var i = 0; i < cart.length; i++) {
-      const available= cart[i].id;
-      const occupied=!cart[i].occupied
-      const data={available,occupied}
-      fetch(`http://127.0.0.1:5000/delete`,{
-      method:"POST",
-      headers:{
-      'Content-Type':'application/json'
-              },
-      body:JSON.stringify(data)
-  }).then(response => response.json())
-  .catch(error => console.log(error))
-}
+    confirm=localStorage.getItem("confirm")
+    if(confirm){
+      for (var i = 0; i < cart.length; i++) {
+        const available= cart[i].id;
+        const occupied=!cart[i].occupied;
+        const user=log.id;
+        const data={available,occupied,user}
+        fetch(`http://127.0.0.1:5000/delete`,{
+        method:"POST",
+        headers:{
+        'Content-Type':'application/json'
+                },
+        body:JSON.stringify(data)
+    }).then(response => response.json())
+    .catch(error => console.log(error))
+  }
+    }
     localStorage.removeItem("cart")
+    localStorage.removeItem("confirm")
 		localStorage.removeItem("movie_name")
 		localStorage.removeItem("movie_id")
 		localStorage.removeItem("show_time")
@@ -67,8 +69,9 @@ const startTimer = (e) => {
 		localStorage.removeItem("seats_wanted")
 		localStorage.removeItem("price")
 		localStorage.removeItem("seatsSelected")
-navigate("/main")
-  }
+    navigate("/main")
+  
+}
 }
 
 const clearTimer = (e) => {
@@ -82,7 +85,7 @@ const clearTimer = (e) => {
 
 const getDeadTime = () => {
   let deadline = new Date();
-  deadline.setSeconds(deadline.getSeconds() + 300);
+  deadline.setSeconds(deadline.getSeconds() + 30);
   return deadline;
 }
 

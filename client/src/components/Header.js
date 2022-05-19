@@ -9,7 +9,26 @@ NavBtn,
 NavBtnLink,
 } from './NavbarElements';
 // import { NavDropdown } from './NavbarElements';
-
+function block(){
+	var res=localStorage.getItem("user")
+	const log=JSON.parse(res)
+	var cart1=localStorage.getItem("cart")
+	const cart=JSON.parse(cart1)
+	for (var i = 0; i < cart.length; i++) {
+		const available= cart[i].id;
+		const occupied=!cart[i].occupied;
+		const user=log.id;
+		const data={available,occupied,user}
+		fetch(`http://127.0.0.1:5000/delete`,{
+		method:"POST",
+		headers:{
+		'Content-Type':'application/json'
+				},
+		body:JSON.stringify(data)
+	}).then(response => response.json())
+	.catch(error => console.log(error))
+  }
+}
 
 
 
@@ -24,27 +43,9 @@ const Header = () => {
 	}, [navbarUserIsLogged]);
 	
 	const handleLogout = () => {
-		var res=localStorage.getItem("user")
-		const log=JSON.parse(res)
-		var cart1=localStorage.getItem("cart")
-		const cart=JSON.parse(cart1)
 		var confirm=localStorage.getItem("confirm")
-		
 		if(confirm){
-			for (var i = 0; i < cart.length; i++) {
-				const available= cart[i].id;
-				const occupied=!cart[i].occupied;
-				const user=log.id;
-				const data={available,occupied,user}
-				fetch(`http://127.0.0.1:5000/delete`,{
-				method:"POST",
-				headers:{
-				'Content-Type':'application/json'
-						},
-				body:JSON.stringify(data)
-			}).then(response => response.json())
-			.catch(error => console.log(error))
-		  }
+			block()
 		  localStorage.clear()
 
 	setnavbarUserIsLogged(false);
@@ -61,12 +62,9 @@ const Header = () => {
 		
 	  }
 	  const home=()=>{
-		var res=localStorage.getItem("user")
-		const log=JSON.parse(res)
-		var cart1=localStorage.getItem("cart")
-		const cart=JSON.parse(cart1)
+		
 		var confirm=localStorage.getItem("confirm")
-		if(!confirm && !cart){
+		if(!confirm){
 			localStorage.removeItem("cart")
 			localStorage.removeItem("movie_name")
 			localStorage.removeItem("movie_id")
@@ -79,20 +77,7 @@ const Header = () => {
 			localStorage.removeItem("seatsSelected")
 	  }
 	else{
-		for (var i = 0; i < cart.length; i++) {
-			const available= cart[i].id;
-			const occupied=!cart[i].occupied;
-			const user=log.id;
-			const data={available,occupied,user}
-			fetch(`http://127.0.0.1:5000/delete`,{
-			method:"POST",
-			headers:{
-			'Content-Type':'application/json'
-					},
-			body:JSON.stringify(data)
-		}).then(response => response.json())
-		.catch(error => console.log(error))
-	  }
+		block()
 	  localStorage.removeItem("cart")
 localStorage.removeItem("movie_name")
 localStorage.removeItem("movie_id")
