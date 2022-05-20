@@ -1,10 +1,12 @@
 import React from 'react'
 import { Navigate,Outlet } from "react-router-dom";
-
+import { useAlert } from 'react-alert';
 
 
 
 const SubProtectedRoutes = () => {
+
+  const alert=useAlert()
     
       const seat_wanted = localStorage.getItem("seats_wanted");
       const user=localStorage.getItem("user");
@@ -18,7 +20,7 @@ const SubProtectedRoutes = () => {
       else if (user && !seat_wanted) {
             
         
-          alert("Please fill all the details");
+          alert.show("Please fill all the details",{type:"info"});
           
     
            return <Navigate to="/main"/>
@@ -28,7 +30,7 @@ const SubProtectedRoutes = () => {
       else if (user && !theatre_id) {
             
         
-        alert("Please fill all the details");
+        alert.show("Please fill all the details",{type:"info"});
         
   
          return <Navigate to="/main"/>
@@ -38,7 +40,7 @@ const SubProtectedRoutes = () => {
     else if (user && !show_id) {
             
         
-      alert("Please fill all the details");
+      alert.show("Please fill all the details",{type:"info"});
       
 
        return <Navigate to="/main"/>

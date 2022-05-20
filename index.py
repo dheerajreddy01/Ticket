@@ -1,5 +1,6 @@
 
 
+from email.mime import image
 from flask import Flask, request, jsonify,session
 from sqlalchemy import ForeignKey, ForeignKeyConstraint
 from flask_sqlalchemy import SQLAlchemy 
@@ -132,17 +133,19 @@ class Movie(db.Model):
     _tablename_ = 'movies'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
+    image=db.Column(db.Text)
     
 
-    def __init__(self,name):
+    def __init__(self,name,image):
         self.name=name
+        self.image=image
         
 
     def serialize(self):
         return {
             "id":self.id,
             "name":self.name,
-            
+            "image":self.image
             }  
 
 class Theatre(db.Model):
@@ -335,7 +338,8 @@ def movie():
 @cross_origin()
 def create_movie():
     name = request.json['movie_name']
-    movies=Movie(name)
+    image=request.json["image"]
+    movies=Movie(name,image)
     db.session.add(movies)
     db.session.commit()
     return jsonify({'movies': movies.serialize()}), 201

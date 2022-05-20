@@ -185,7 +185,7 @@ const main=()=>{
                  
             </div>
             </div>
-            {cart.length>0?
+            {/* {cart.length>0? */}
             <>
             <div className="selecteds">
             <p>Selected seats:
@@ -196,7 +196,7 @@ const main=()=>{
                     </div>
             <div className='rows'><p>Total price of tickets:&#x20b9; {price}/-</p></div>
             </>
-:<><br></br></>}
+{/* :<><br></br></>} */}
             <div>
             <button className='route' onClick={main}>Back</button>
          <button className='route' onClick={blockSeats}>Confirm</button>
