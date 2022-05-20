@@ -45,7 +45,7 @@ const startTimer = (e) => {
     if(confirm){
       for (var i = 0; i < cart.length; i++) {
         const available= cart[i].id;
-        const occupied=!cart[i].occupied;
+        const occupied=!true;
         const user=log.id;
         const data={available,occupied,user}
         fetch(`http://127.0.0.1:5000/delete`,{
@@ -69,8 +69,7 @@ const startTimer = (e) => {
 		localStorage.removeItem("seats_wanted")
 		localStorage.removeItem("price")
 		localStorage.removeItem("seatsSelected")
-    navigate("/main")
-  
+    navigate("/main") 
 }
 }
 
@@ -85,7 +84,7 @@ const clearTimer = (e) => {
 
 const getDeadTime = () => {
   let deadline = new Date();
-  deadline.setSeconds(deadline.getSeconds() + 30);
+  deadline.setSeconds(deadline.getSeconds() + 300);
   return deadline;
 }
 
@@ -119,7 +118,7 @@ const navigate=useNavigate();
     }
       for (var i = 0; i < cart.length; i++) {
         const id= cart[i].id;
-         const occupied=cart[i].occupied;
+         const occupied=true;
          const user=log.id
          const data={occupied,user}
           
@@ -161,7 +160,7 @@ const navigate=useNavigate();
       function deleteblock(){
         for (var i = 0; i < cart.length; i++) {
         const available= cart[i].id;
-        const occupied=!cart[i].occupied;
+        const occupied=!true;
         const user=log.id;
         const data={available,occupied,user}
         fetch(`http://127.0.0.1:5000/delete`,{
@@ -178,12 +177,15 @@ const navigate=useNavigate();
   localStorage.removeItem("price")
   localStorage.removeItem('seatsSelected')
   clearInterval(Ref.current);
-  navigate("/seats")
+  setTimeout(function(){
+    navigate("/seats")
+}, 1000)
 }   
 window.onbeforeunload = function(){
+
   for (var i = 0; i < cart.length; i++) {
   const available= cart[i].id;
-  const occupied=!cart[i].occupied
+  const occupied=!true
   const user=log.id
   const data={available,occupied,user}
   

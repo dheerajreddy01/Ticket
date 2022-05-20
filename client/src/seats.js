@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react'
+import React,{StrictMode, useEffect,useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import './App.css'
 import { useAlert } from "react-alert";
@@ -7,6 +7,8 @@ import axios from 'axios';
 
 
 export default function Seats(){
+
+
 
     const [data, setData] = useState([]);
     const alert=useAlert()
@@ -42,6 +44,10 @@ export default function Seats(){
     const[seat_selected,setSeatselected]=useState(getseatsSelected());
     const [cart, setCart] = useState(getDatafromLS());
     const [price,setPrice]=useState(getPricefromLs());
+
+    localStorage.setItem("cart",JSON.stringify(cart))
+    localStorage.setItem('price',JSON.stringify(price))
+    localStorage.setItem('seatsSelected',JSON.stringify(seat_selected))
   
     const getData = async () => {
       try{
@@ -59,10 +65,8 @@ export default function Seats(){
     };
   useEffect(() => {
       getData();
-      localStorage.setItem("cart",JSON.stringify(cart))
-       localStorage.setItem('price',JSON.stringify(price))
-       localStorage.setItem('seatsSelected',JSON.stringify(seat_selected))
-    }, [cart,price,seat_selected]);
+      
+    }, []);
 
     let seats_wanted=localStorage.getItem("seats_wanted")
     
@@ -71,7 +75,6 @@ export default function Seats(){
       const checkTicket=cart.filter((item)=>item.id===data.id);
       if(checkTicket.length>0){
         e.target.style.background="#444451"
-        data.occupied=false
         setSeatselected(seat_selected-1)
         setCart(cart.filter((item) => item.id !== data.id))
         setPrice(price-(data.price))
@@ -79,11 +82,8 @@ export default function Seats(){
         if(seat_selected<seats_wanted){
           e.target.style.background="red"
           localStorage.getItem("cart")
-          data.occupied=true
-          
           setCart([...cart, data]);
           setSeatselected(seat_selected+1)
-          console.log(data.occupied=true)
        setPrice(parseInt(data.price+price))
         
         }
@@ -109,7 +109,7 @@ export default function Seats(){
       const available= cart[i].id;
       console.log(available)
       const user=users.id;
-      const occupied=cart[i].occupied
+      const occupied=true
       const data={available,user,occupied}
     let result=fetch(`http://127.0.0.1:5000/block`,{
       method:'POST',
@@ -139,9 +139,10 @@ navigate('/confirmation')
       alert.show("seats already booked",{type:' error'});
       localStorage.removeItem("cart");
       localStorage.removeItem("price");
-      localStorage.removeItem("seatsSelected")
-      localStorage.removeItem('seatsWanted')
-      navigate('/main')
+      localStorage.removeItem('seatsSelected')    
+      setTimeout(function(){
+        navigate("/main")
+    }, 1000)
     }
   }
 }
@@ -160,6 +161,7 @@ const main=()=>{
 }
 
   return(
+    <StrictMode>
       <div className='App'>
 <h2>Available seats</h2>
      
@@ -183,6 +185,8 @@ const main=()=>{
                  
             </div>
             </div>
+            {cart.length>0?
+            <>
             <div className="selecteds">
             <p>Selected seats:
                   
@@ -190,7 +194,9 @@ const main=()=>{
                     {cart && cart.map((item)=><p className='selected on' key={item.id}  >{item.name}
                     </p>)}
                     </div>
-            <div className='rows'><p>Total price of tickets:Rs { price} /-</p></div>
+            <div className='rows'><p>Total price of tickets:&#x20b9; {price}/-</p></div>
+            </>
+:<><br></br></>}
             <div>
             <button className='route' onClick={main}>Back</button>
          <button className='route' onClick={blockSeats}>Confirm</button>
@@ -199,6 +205,7 @@ const main=()=>{
             </div>
            
       </div>
+      </StrictMode>
   )
 }
 
