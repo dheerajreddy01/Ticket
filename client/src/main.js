@@ -6,7 +6,6 @@ import major from './assets/majorimg.jpg'
 
 
 
-
 class Main extends Component {
   constructor(props) {
     super(props);
