@@ -1,8 +1,7 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
 import './ticket.css'
+import moment from 'moment';
  function Ticket() {
-const navigate=useNavigate();
  let seats=localStorage.getItem("seats_wanted")
  let movie=localStorage.getItem("movie_name")
  let user=localStorage.getItem("user")
@@ -12,24 +11,16 @@ let price=localStorage.getItem("price")
 const res=localStorage.getItem("cart")
 let cart=JSON.parse(res)
 var location=localStorage.getItem("theatre_name")
-var time=localStorage.getItem("show_time")
+var resdate=localStorage.getItem("dateselected")
+let date=moment(resdate).format('MMMM Do, YYYY')
 let movies=[]
     for(var j=0;j<cart.length;j++){
       movies[j]=cart[j].name
     }
-const home=()=>{
-  navigate("/")
-  localStorage.removeItem("cart")
-  localStorage.removeItem("movie_name")
-  localStorage.removeItem("movie_id")
-  localStorage.removeItem("show_time")
-  localStorage.removeItem("show_id")
-  localStorage.removeItem("theatre_name")
-  localStorage.removeItem("theatre_id")
-  localStorage.removeItem("seats_wanted")
-  localStorage.removeItem("price")
-  localStorage.removeItem("seatsSelected")
-}
+
+
+
+
 function printDiv() 
 {
  
@@ -39,10 +30,9 @@ function printDiv()
  window.print();
  document.body.innerHTML = originalContents;
 }
-
   return (
     <>
-<div className="contenido" id='print'>
+<div  className="contenido" id="print" >
   <div className="ticket">
     <div className="hqr">
       <div className="column left-one"></div>
@@ -51,23 +41,30 @@ function printDiv()
       </div>
       <div className="column right-one"></div>
     </div>
+    <center>
+    <div className='header'>Ticket Booking</div>
+    </center>
     </div>
     <div className="details">
       <div className="tinfo">
-        Name
+       Movie Name
       </div>
       <div className="tdata name">
         {movie}
       </div>
-      <div className="tinfo">
-        ticket
+      
+       <div className="tinfo">
+       Number of Tickets:
       </div>
-      <div className="tdata">
-        <span>{seats}</span>
-        </div>
-        <div className="tdata">
-        {movies.toString()}
-      </div>  
+      <div className="tdata name">
+       <span>{seats}</span> 
+      </div>
+      <div className="tinfo">
+       Seats
+      </div>
+      <div className="tdata name">
+       {movies.toString()}
+      </div>
         
       <div className="tinfo">
         Price
@@ -81,7 +78,7 @@ function printDiv()
         Date
       </div>
       <div className="tdata">
-        {time   }
+        {date}
       </div>  
       
       <div className="masinfo">
@@ -102,17 +99,22 @@ function printDiv()
       </div> 
         </div>
         <div className="link">
-        <button onClick={printDiv}>PRINT</button>
+        {/* <button onClick={printDiv}>PRINT</button> */}
       </div>
       
       </div>
-      
+     
     </div>
+    
   </div>
 
-  <div className="link">
-        <button className='route' onClick={home}>Home</button>
+
+
+ <div className="link">
+       <button className='route' onClick={printDiv}>PRINT</button>
       </div>
+
+  
   
 </>
 );

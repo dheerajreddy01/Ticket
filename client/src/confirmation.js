@@ -1,21 +1,16 @@
 import React,{useState,useRef,useEffect} from 'react'
-
-import './App.css'
+import './confirmation.css'
 import { useNavigate } from 'react-router-dom'
 import { useAlert } from 'react-alert';
-
 
 export default function Confirmation(){
 
 
-  const alert=useAlert();
+const alert=useAlert();
 const Ref = useRef(null);
 const [timer, setTimer] = useState('00:00:00');
-
 var confirm="ok"
 localStorage.setItem("confirm",JSON.stringify(confirm))
-
-
 
 const getTimeRemaining = (e) => {
   const total = Date.parse(e) - Date.parse(new Date());
@@ -69,6 +64,9 @@ const startTimer = (e) => {
 		localStorage.removeItem("seats_wanted")
 		localStorage.removeItem("price")
 		localStorage.removeItem("seatsSelected")
+    localStorage.removeItem("dateselected")
+    localStorage.removeItem("datetimeselected");
+    localStorage.removeItem("showlist");
     navigate("/main") 
 }
 }
@@ -152,7 +150,6 @@ const navigate=useNavigate();
   clearInterval(Ref.current);
   alert.show("Seats Reserved Successfully",{type:"success"})
   localStorage.removeItem("confirm")
-
   navigate("/ticket")
       }
 
@@ -181,37 +178,54 @@ const navigate=useNavigate();
     navigate("/seats")
 }, 1000)
 }   
+
+ 
 window.onbeforeunload = function(){
-
-  for (var i = 0; i < cart.length; i++) {
-  const available= cart[i].id;
-  const occupied=!true
-  const user=log.id
-  const data={available,occupied,user}
+  var confirm1=localStorage.getItem("confirm")
+  if(confirm1){
+    for (var i = 0; i < cart.length; i++) {
+    const available= cart[i].id;
+    const occupied=!true
+    const user=log.id
+    const data={available,occupied,user}
+    
+    fetch(`http://127.0.0.1:5000/delete`,{
+    method:"POST",
+    headers:{
+    'Content-Type':'application/json'
+            },
+    body:JSON.stringify(data)
+  }).then(response => response.json())
+  .catch(error => console.log(error))
+  }
+  localStorage.removeItem("cart")
+  localStorage.removeItem("movie_name")
+  localStorage.removeItem("movie_id")
+  localStorage.removeItem("show_time")
+  localStorage.removeItem("show_id")
+  localStorage.removeItem("confirm")
+  localStorage.removeItem("theatre_name")
+  localStorage.removeItem("theatre_id")
+  localStorage.removeItem("seats_wanted")
+  localStorage.removeItem("price")
+  localStorage.removeItem("seatsSelected")
+  clearInterval(Ref.current);
+  }else{
+    localStorage.removeItem("cart")
+  localStorage.removeItem("movie_name")
+  localStorage.removeItem("movie_id")
+  localStorage.removeItem("show_time")
+  localStorage.removeItem("show_id")
+  localStorage.removeItem("confirm")
+  localStorage.removeItem("theatre_name")
+  localStorage.removeItem("theatre_id")
+  localStorage.removeItem("seats_wanted")
+  localStorage.removeItem("price")
+  localStorage.removeItem("seatsSelected")
+  clearInterval(Ref.current);
+  }
   
-  fetch(`http://127.0.0.1:5000/delete`,{
-  method:"POST",
-  headers:{
-  'Content-Type':'application/json'
-          },
-  body:JSON.stringify(data)
-}).then(response => response.json())
-.catch(error => console.log(error))
-}
-localStorage.removeItem("cart")
-localStorage.removeItem("movie_name")
-localStorage.removeItem("movie_id")
-localStorage.removeItem("show_time")
-localStorage.removeItem("show_id")
-localStorage.removeItem("confirm")
-localStorage.removeItem("theatre_name")
-localStorage.removeItem("theatre_id")
-localStorage.removeItem("seats_wanted")
-localStorage.removeItem("price")
-localStorage.removeItem("seatsSelected")
-clearInterval(Ref.current);
-
-}
+  }
     return(
         <div className='conf-des'>
                  <div className ='conf'>

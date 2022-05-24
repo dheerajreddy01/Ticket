@@ -36,24 +36,15 @@ function Login() {
           alert.show("Logged-In Success", { type: "success" });
           navigate("/")
           localStorage.setItem("user",JSON.stringify(result.user))  
-          // setnavbarUserIsLogged(true)
           window.location.reload(true);
-
-        }
-       
-        
+        } 
       }
   
         
       catch(e){
         console.log(e)
       }
-
-   
   }
-
- 
-
   return (
    <>
     <div className="login-page">

@@ -5,6 +5,8 @@ body{
   color: black;
   display: flex;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  
+
 }
 label{
   font-size: medium;
@@ -22,68 +24,7 @@ label{
   margin: auto;
   margin:5px;
 }
-.rows{
-  display: flexbox;
-  max-width: 500px;
-  color: black;
-  margin: auto;
-  overflow: auto;
-}
 
-.row{
-  display: flexbox;
-  max-width: 1000px;
-  color:brown;
-  margin: auto;
-  overflow: auto;
-  font-size: 30px;
-  margin-top: 10px;
-  padding-top: 50px;
-  background: #f0f0f0;
-}
-
-.col{
-  float:left;
-  width: 50%;
-  padding: 5px;
-  padding-left: 120px;
-}
-
-.property{
-  border:3px;
-  /* background-color: pink; */
-  align-items: center;
-  text-align: center;
-  height: 100px;
-  font-size: 22px;
-  
- 
-}
-
-.movname-des{
-  font-size: 40px;
-  text-align: center;
-  margin-right: 110px;
-}
-.property input{
-  width:130px;
-  margin-left: 8px;
-}
-.form-des{
-  float: left;
-  margin-left: 160px;
-}
-.theatre{
-  float:left;
-  margin-left:100px;
-
-}
-.show{
-  
-  float:left;
-  margin-left:100px;
-
-}
 
 .seat{
   margin:5px;
@@ -102,39 +43,83 @@ h1{
   font-weight: 350;
   text-transform: capitalize;
   color: rgb(30, 33, 189);
+ 
 
   /* color:darkblue; */
 
 }
+.rowi{
+  color:darkred;
+
+}
 .screen{
-  background-color: rgb(141, 149, 150);
-  height: 80px;
-  margin-left:390px;
-  margin-right:300px;
-  margin-top: 20px;
-  width:50%;
-  /* transform: rotateX(-50deg); */
-  /* box-shadow: 0 3px 10px rgba(255,255,255,0.75); */
-  /* -webkit-transform: skew(150deg);
-  -moz-transform: skew(150deg);
-  -o-transform: skew(150deg); */
-  transform: skew(150deg);
+  /* background-color: rgb(141, 149, 150); */
+  background-color: rgb(142, 200, 219);
+  height: 50px;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+   width:340px;
+   margin-top: 20px;
+   transform: skew(160deg); 
+
+}
+.eventname{
+
+  height: 70px;
+  width: 100%;
+  
+  color: rgb(155, 66, 66);
+  font-size: 30px;
+  text-align: left;
+  padding-left: 40px;
+  
+  /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif */
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.eventname img{
+  height: 40px;
+}
+
+@media screen and (max-width:700px){
+  .eventname{
+    height: 40px;
+    font-size: 20px;
+    float:left;
+
+  }
+  .eventname img{
+    height: 35px;
+  }
+  
+}
+@media screen and (max-width:400px){
+  .eventname{
+    padding-left: 10px;
+  }
 
 }
 
+
+
 .App {
+  
+  align-items: center;
+  justify-content: center;
+ 
   text-align: center;
   color: white;
   line-height: 40px;
   perspective: 1000px;
   margin-bottom: 30px;
-  /* margin:20px; */
+
   height:720px;
-  /* outline: 3px solid darkred; */
+
   background-color:gainsboro;
-  padding-top: 100px;
+  padding-top: 60px;
 
 }
+
 
 .occupied{
   margin:5px;
@@ -156,47 +141,7 @@ select{
   border-radius: 2px;
 }
 
-.book{
-  /* margin-top: 100px; */
-  align-items: center;
- padding-top: 50px; 
- 
-  justify-content: center;
-  /* background-color:burlywood; */
-  height: 800px;
-  color:black;
-  
-  /* background-image: url("images/img1.jpeg");
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-size: 1500px 800px; */
 
-}
-
-.movieselect {
-  border: 10px;
-  border-color: red;
-  /* padding-left: 100px; */
-  
-  /* background-color: white; */
-  background: #f0f0f0;
-  
-  margin-top: 0px;
-  font-size: 28px;
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  height:500px ;
-  
-}
- .movieselect input{
-    width:150px;
-    height: 28px;
-    margin-left: 10px;
-    margin-bottom: 10px;
-}
-.card-img-top{
-  height:300px;
-  width:250px;
-}
 
 
 .route{
@@ -205,36 +150,22 @@ select{
   color: white;
   padding: 8px 15px;
   width: 200px;
-
+  /* margin-right: 220px; */
+  /* margin-left: 100px; */
   text-align: center;
   text-decoration: none;
-  margin-right: 30px;
   display: inline;
   font-size: 20px;
 
 }
-.routes{
-  background-color:darkturquoise; /* Green */
-  border: none;
-  color:darkred;
-  padding: 8px 16px;
-  width: 100px;
-  text-align: center;
-  text-decoration: none;
-  display: inline;
-  font-size: 16px;
-  margin-left: 20px;
 
-}
 .route-back{
   background-color:darkturquoise; /* Green */
   border: none;
   color: darkred;
   padding: 8px 15px;
- 
   width: 100px;
   font-weight: 20px;
-  
   text-align: center;
   text-decoration: none;
   display: inline;
@@ -248,6 +179,8 @@ select{
   border: none;
   color:darkred;
   padding: 8px 15px;
+  margin-right:30px;
+  margin-top:20px;
   width: 100px;
   /* margin-right: 220px; */
   /* margin-left: 100px; */
@@ -258,20 +191,21 @@ select{
   font-weight: 20px;
 
 }
-
-.submit{
-  background-color:darkturquoise;
-  border:none;
-  color:darkred;
-  cursor: pointer;
-  display: inline;
-  width:100px;
-  padding: 8px 15px;
-  font-size: 16px;
-  text-align: center;
-  text-decoration: none;
-  margin-left: 200px;
+@media screen and (max-width:430px){
+  .screen{
+    width:100px;
+    height: 80px;
+  }
+   .route-back{
+     margin-right: 20px;
+   }
+   .route-conf{
+     width:100px;
+   }
+ 
+  
 }
+
 .logo{
   padding-left: 20px;
   align-items: center;
@@ -407,34 +341,3 @@ margin-bottom: 26px;
 }
 
 
-.conf-des{
-  background-color: rgb(254, 253, 253);
-  height:800px;
-  padding-top: 150px;
-  text-align: center;
- 
-}
-.conf{
-  outline: 2px solid white;
-  height:350px;
-  width:500px;
-  background-color: #f2f2f2;
-  margin-left: 500px;
- 
-  
-}
-.conf h1{
- padding-top: 30px;
- font-family: 'Courier New', Courier, monospace;
- color: rgb(24, 230, 192);
- 
-}
-.conf p{
-  font-size: 20px;
-  font-family: 'Courier New', Courier, monospace;
-  color:rgb(7, 1, 1);
-}
-.conf span{
-  color: rgb(105, 48, 237);
-  font-weight: 400;
-}

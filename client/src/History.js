@@ -69,7 +69,7 @@ function History(){
 
 			
 			<a href="" className="price">
-				Rs {item.price}/-
+      &#x20b9; {item.price}/-
 			</a>
       <a href="" className='barcode'>
 			</a>

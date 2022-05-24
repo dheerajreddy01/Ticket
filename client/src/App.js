@@ -16,11 +16,14 @@ import Contact from './contact';
 import History from './History';
 import Ticket from './Ticket';
 
+
+
+
+
 function App() {
   return (
    <Router>
       <Navbar/>
-      
 
       <Routes>
       <Route path="/" element={<Home/>}/>
@@ -31,6 +34,7 @@ function App() {
         
         <Route element={<ProtectedRoutes/>}>
         <Route path="/main" element={<Main/>}/>
+        
         <Route element ={<SubProtectedRoutes/>}>
         <Route path="/seats" element={<Seats/>}/>
         </Route>

@@ -7,7 +7,7 @@ width:300px;
 
 .contenido {
   margin: 30px auto;
-  max-height: 430px;
+  max-height: 530px;
   max-width: 245px;
   overflow: hidden;
   box-shadow: 0 0 10px rgb(202, 202, 204);
@@ -101,17 +101,20 @@ button {
     font-weight: 400;
     color: rgb(36, 36, 229)
 }
-.routes{
+.route{
   background-color:darkturquoise; /* Green */
   border: none;
   color:darkred;
   padding: 8px 15px;
   width: 100px;
-  /* margin-right: 220px; */
-  /* margin-left: 100px; */
+
   text-align: center;
   text-decoration: none;
   display: inline;
   font-size: 16px;
   font-weight: 20px;
+}
+.header{
+  text-transform: uppercase;
+  color: #f82222;
 }

@@ -12,6 +12,7 @@ const SubProtectedRoutes = () => {
       const user=localStorage.getItem("user");
       const show_id=localStorage.getItem("show_id");
       const theatre_id=localStorage.getItem("theatre_id");
+      const movie_id=localStorage.getItem("movie_id");
 
       if(!user)
       {
@@ -26,6 +27,12 @@ const SubProtectedRoutes = () => {
            return <Navigate to="/main"/>
             
  
+      }
+      else if(user && !movie_id){
+        alert.show("Please fill all the details",{type:"info"});
+          
+    
+        return <Navigate to="/main"/>
       }
       else if (user && !theatre_id) {
             

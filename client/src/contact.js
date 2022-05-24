@@ -9,10 +9,7 @@ const Contact=()=>{
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
-    const [emailSent, setEmailSent] = useState(false);
-
-  
-   
+    
     const submit = () => {
         if (name && email && message) {
             const serviceId = 'ticket';
@@ -45,7 +42,7 @@ return(
   <div className="contact-box">
     <div className="contact-links">
       <h2 className="contact">CONTACT</h2>
-      <div className="links">
+      {/* <div className="links">
         <div className="link">
           <a><img src="https://i.postimg.cc/m2mg2Hjm/linkedin.png" alt="linkedin"/></a>
         </div>
@@ -58,7 +55,7 @@ return(
         <div className="link">
           <a><img src="https://i.postimg.cc/NjLfyjPB/email.png" alt="email"/></a>
         </div>
-      </div>
+      </div> */}
     </div>
     <div className="contact-form-wrapper">
       <form>
