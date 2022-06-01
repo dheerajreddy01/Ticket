@@ -1,5 +1,5 @@
 import React,{StrictMode, useEffect,useState} from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { useAlert } from "react-alert";
 
 import './App.css';
@@ -48,7 +48,6 @@ export default function Seats(){
     const getData = async () => {
       try{
         const movie=localStorage.getItem('movie_id')
-        // const theatre=localStorage.getItem("theatre_id")
         const show=localStorage.getItem("show_id")
         const res = await fetch("http://127.0.0.1:5000/seats/movieId/"+movie+"/showId/"+show)
         const data = await res.json();
@@ -76,8 +75,7 @@ export default function Seats(){
         if(seat_selected<seats_wanted){
           e.target.style.background="red"
           localStorage.getItem("cart")
-          
-          // data.selected_users=name
+            // data.selected_users=name
           setCart([...cart, data]);
           setSeatselected(seat_selected+1)
          
@@ -125,7 +123,7 @@ export default function Seats(){
         }
         else if((await result).status ===400){ 
           check+=1
-          
+          console.log(check)
         }
 }
 }
@@ -136,18 +134,33 @@ if(check===0){
 navigate('/confirmation')
     }
     else{
-      alert.show("Seats already booked",{type:"error"});
+      alert.show("Seats already booked",{type:"error"}); 
       localStorage.removeItem("cart");
       localStorage.removeItem("price");
       localStorage.removeItem("seatsSelected")
+      localStorage.removeItem('seatsWanted')
+
       setTimeout(function(){
         navigate("/main")
-    }, 1000)  
+    }, 1000)
     }
   }
 }
 let com=localStorage.getItem("movie_name")
 let sam=localStorage.getItem("theatre_name")
+let  time=localStorage.getItem("show_time")
+function tConvert (time) {
+  // Check correct time format and split into components
+  time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+  if (time.length > 1) { // If time format correct
+    time = time.slice (1);  // Remove full string match value
+    time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+    time[0] = +time[0] % 12 || 12; // Adjust hours
+  }
+  return time.join (''); // return adjusted time or original string
+}
+
 
 const main=()=>{
   navigate('/main')
@@ -173,6 +186,7 @@ const main=()=>{
   
        <img src={icon} /> {com}<br/>  
         <img src={icon2} /> {sam}  
+        <br/>{tConvert(time)}
  
 </div>
 <br/>
@@ -236,3 +250,4 @@ const main=()=>{
 
 
 
+ 

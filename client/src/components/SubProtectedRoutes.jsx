@@ -28,12 +28,6 @@ const SubProtectedRoutes = () => {
             
  
       }
-      else if(user && !movie_id){
-        alert.show("Please fill all the details",{type:"info"});
-          
-    
-        return <Navigate to="/main"/>
-      }
       else if (user && !theatre_id) {
             
         
@@ -43,6 +37,13 @@ const SubProtectedRoutes = () => {
          return <Navigate to="/main"/>
           
 
+    }
+    else if(user && !movie_id){
+      
+      alert.show("Please fill all the details",{type:"info"});
+        
+  
+      return <Navigate to="/main"/>
     }
     else if (user && !show_id) {
             

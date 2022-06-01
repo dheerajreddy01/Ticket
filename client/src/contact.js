@@ -9,7 +9,10 @@ const Contact=()=>{
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
-    
+  
+
+  
+   
     const submit = () => {
         if (name && email && message) {
             const serviceId = 'ticket';
@@ -37,25 +40,25 @@ const Contact=()=>{
 
 
 return(
-    <div>
+    <div className="cont-des">
         <section id="contact">
   <div className="contact-box">
     <div className="contact-links">
       <h2 className="contact">CONTACT</h2>
-      {/* <div className="links">
-        <div className="link">
-          <a><img src="https://i.postimg.cc/m2mg2Hjm/linkedin.png" alt="linkedin"/></a>
-        </div>
-        <div className="link">
-          <a><img src="https://i.postimg.cc/YCV2QBJg/github.png" alt="github"/></a>
-        </div>
-        <div className="link">
-          <a><img src="https://i.postimg.cc/W4Znvrry/codepen.png" alt="codepen"/></a>
-        </div>
-        <div className="link">
-          <a><img src="https://i.postimg.cc/NjLfyjPB/email.png" alt="email"/></a>
-        </div>
-      </div> */}
+        {/* <div className="links">
+          <div className="link">
+            <a><img src="https://i.postimg.cc/m2mg2Hjm/linkedin.png" alt="linkedin"/></a>
+          </div>
+          <div className="link">
+            <a><img src="https://i.postimg.cc/YCV2QBJg/github.png" alt="github"/></a>
+          </div>
+          <div className="link">
+            <a><img src="https://i.postimg.cc/W4Znvrry/codepen.png" alt="codepen"/></a>
+          </div>
+          <div className="link">
+            <a><img src="https://i.postimg.cc/NjLfyjPB/email.png" alt="email"/></a>
+          </div>
+        </div> */}
     </div>
     <div className="contact-form-wrapper">
       <form>

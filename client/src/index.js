@@ -1,3 +1,24 @@
+// import React from 'react';
+// import ReactDOM from 'react-dom/client';
+// import './index.css';
+// import App from './App';
+// import reportWebVitals from './reportWebVitals';
+
+
+
+// const container=document.getElementById('root') ;
+// const rootContainer=ReactDOM.createRoot(container);
+// rootContainer.render( 
+// //    <React.StrictMode>
+// //   <App />
+// // </React.StrictMode>
+// <App/>
+// ,)
+
+// reportWebVitals();
+
+
+
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
@@ -18,9 +39,10 @@ const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
 root.render(
-  <StrictMode>
-    <AlertProvider template={AlertTemplate} {...options}>
-      <App />
-    </AlertProvider>
-  </StrictMode>
+  // <StrictMode>
+    
+  // </StrictMode>
+  <AlertProvider template={AlertTemplate} {...options}>
+  <App />
+</AlertProvider>
 );

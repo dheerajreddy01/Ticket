@@ -66,7 +66,7 @@ const startTimer = (e) => {
 		localStorage.removeItem("seatsSelected")
     localStorage.removeItem("dateselected")
     localStorage.removeItem("datetimeselected");
-    localStorage.removeItem("showlist");
+    localStorage.removeItem("showllist");
     navigate("/main") 
 }
 }
@@ -150,6 +150,7 @@ const navigate=useNavigate();
   clearInterval(Ref.current);
   alert.show("Seats Reserved Successfully",{type:"success"})
   localStorage.removeItem("confirm")
+
   navigate("/ticket")
       }
 
@@ -179,7 +180,6 @@ const navigate=useNavigate();
 }, 1000)
 }   
 
- 
 window.onbeforeunload = function(){
   var confirm1=localStorage.getItem("confirm")
   if(confirm1){

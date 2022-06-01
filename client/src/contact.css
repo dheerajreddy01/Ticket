@@ -28,6 +28,10 @@
   padding: 8% 5% 10% 5%;
   
 }
+.cont-des{
+  background-color:gainsboro;
+  height:800px;
+}
 
 .contact-links {
   background-color: #1f2e43;
@@ -81,6 +85,7 @@
   letter-spacing: 2px;
   text-align: center;
   transform: scale(.95, 1);
+  
 }
 
 .links {
@@ -95,7 +100,7 @@
   cursor: pointer;
 }
 
-img {
+.link img {
   width: 45px;
   height: 45px;
   filter: 
@@ -105,7 +110,7 @@ img {
   user-select: none;
 }
 
-img:hover {
+.links img:hover {
   transform: scale(1.1, 1.1);
 }
 
@@ -152,6 +157,7 @@ textarea:focus+label,
 textarea:valid+label {
   font-size: clamp(13px, 1.3vw, 16px);
   color: #777;
+  
   transition: all .225s ease;
 }
 
@@ -200,21 +206,3 @@ textarea:valid+label {
     height: 38px;
   }
 }
-.selects{
-    /* display: flex; */
-    text-align: center;
-    padding-inline-start: 0;
-    
-   list-style: none;
-  }
-  
-  .select{
-    display: none;
-  
-  }
-  .select.on{
-    display: inline-block;
-  }
-  .select.on~.select.on::before{
-    content: ',';
-  }

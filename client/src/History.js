@@ -1,6 +1,7 @@
 
 import React,{useState,useEffect} from 'react';
 import './History.css'
+import moment from 'moment';
 function History(){
 
     const [data,setData]=useState([])
@@ -21,6 +22,18 @@ function History(){
         let user=localStorage.getItem("user")
         var users=JSON.parse(user)
     let email=users.email
+
+   function tConvert (time) {
+      // Check correct time format and split into components
+      time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+    
+      if (time.length > 1) { // If time format correct
+        time = time.slice (1);  // Remove full string match value
+        time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+        time[0] = +time[0] % 12 || 12; // Adjust hours
+      }
+      return time.join (''); // return adjusted time or original string
+    }
     
     
     
@@ -49,7 +62,7 @@ function History(){
       </li>
       <li>
       <p className='secondary'>Time</p>
-      {item.time}
+      {(item.time)}
       </li>
       <li>
       <p className='secondary'>Theatre</p>
@@ -63,13 +76,13 @@ function History(){
 </li>
 <li>
 <p className='secondary'>Name</p>
-  {item.name}
+<span>{item.name}</span>
 </li>
 </ul>
 
 			
 			<a href="" className="price">
-      &#x20b9; {item.price}/-
+      &#8377;  {item.price}/-
 			</a>
       <a href="" className='barcode'>
 			</a>

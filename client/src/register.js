@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import {  Alert } from "react-bootstrap";
 import { Link,useNavigate } from 'react-router-dom';
-
+import './login.css'
 function Registration() {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
@@ -42,16 +42,16 @@ function Registration() {
        console.log(e)
      }
 
-     navigate("/");  
+     navigate("/main");  
       window.location.reload(true);
      
   }
 
   return (
     <>
-        <div className='login-page'>
+        {/* <div className='login-page'>
         
-          {
+          
           
             <form className='form' onSubmit={handleFormSubmit}>
               
@@ -101,7 +101,7 @@ function Registration() {
                   value={password}
                   
                   // value={password}
-                  placeholder="Enter password"
+                  placeholder="Enter password" required
                   onChange={(event) => setPassword(event.target.value)}
                 />
               </div>
@@ -111,16 +111,73 @@ function Registration() {
              <Link to="/login">Already Have an account?</Link>
                 
               
-              {flag && (
-                <Alert color="primary" variant="danger">
-                  I got it you are in hurry! But every Field is important!
-                </Alert>
-              )}
+             
             </form>
 
           
-        }
-        </div>
+        
+        </div> */}
+         <div className="login-box">
+   <div className="popup">
+  <div className="popup-image">
+    <img src="https://turkce-sozluk.com/api/src/astronot.jpg" alt="Login page image"/>
+  </div>
+    
+        <form className="signinForm" onSubmit={handleFormSubmit}>
+        
+          
+        <input
+                  type="text"
+                  value={name}
+                  required
+                  placeholder="Enter Full Name"
+                  name="name"
+                  className='login-input'
+                  onChange={(event) => setName(event.target.value)}
+                />
+           <input
+                  type="text"
+                  required
+                  className='login-input'
+                  placeholder="Enter username"
+                  onChange={(event) => setusername(event.target.value)}
+                />
+                <input
+                  type="email"
+                  value={email}
+                  required
+                  className='login-input'
+                  placeholder="Enter email"
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+              
+              <input
+                  type="password"
+                  value={password}
+                  className="login-input"
+                  // value={password}
+                  placeholder="Enter password" required
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+          
+            {/* <input
+            className="login-input"
+              type="password"
+              placeholder="Enter password"
+              required
+              onChange={(event) => setPasswordlog(event.target.value)}
+            /> */}
+          <button className="login-btn">Sign up</button>
+          <div className="options">
+      <div>Already Have account? <a className="link" href="/login">Login</a></div>
+      </div>
+          {/* <Link to="/register">Don't Have an account?</Link> */}
+          
+      </form>
+      
+    </div>
+    </div>
+  
     
     </>
   );

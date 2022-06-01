@@ -101,13 +101,14 @@ button {
     font-weight: 400;
     color: rgb(36, 36, 229)
 }
-.route{
+.routes{
   background-color:darkturquoise; /* Green */
   border: none;
   color:darkred;
   padding: 8px 15px;
   width: 100px;
-
+  /* margin-right: 220px; */
+  /* margin-left: 100px; */
   text-align: center;
   text-decoration: none;
   display: inline;

@@ -1,11 +1,11 @@
 .book{
     /* margin-top: 100px; */
     align-items: center;
-   padding-top: 50px; 
+   /* padding-top: 50px;  */
    
     justify-content: center;
     /* background-color:burlywood; */
-    height: 800px;
+    height: 700px;
     color:black;
    
   
@@ -26,7 +26,7 @@
     
   }
 
-  .movieselected{
+  .movie{
     border: 4px solid red;
   }
    .movieselect input{
@@ -72,10 +72,17 @@
     /* background-color: pink; */
     align-items: center;
     text-align: center;
-    height: 100px;
+    height: 200px;
     font-size: 22px;
+
     
    
+  }
+  .form-group{
+    float: left;
+    margin-left: 120px;
+   
+  
   }
   
   .movname-des{
@@ -87,38 +94,68 @@
     width:130px;
     height: 30px;
     margin-left: 8px;
+    /* float:left; */
   }
   .form-des{
     float: left;
-    margin-left: 150px;
+ 
+    margin-left: 100px;
   }
   .theatre{
     float:left;
-    margin-left:150px;
+    margin-left:120px;
   
   }
   .theatre select{
   
       width: 130px;
-      height: 30px;
+      height: 28px;
   }
   .show{
     
     float:left;
-    margin-left:150px;
+    margin-left:120px;
   
   }
+  
+
   .show select{
  
     width: 130px;
-    height: 30px;
+    height: 28px;
 
+  }
+  .dates{
+    float:left;
+    margin-left:120px;
+  }
+  .dates input{
+    width:100px;
+    margin-left: 10px;
+  }
+  .sub-btn {
+    background-color: #4CAF50; /* Green */
+
+    color: white;
+    padding: 8px 15px;
+    width: 120px;
+    margin-left:700px;
+
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+  
+  
+    font-size: 20px;
   }
 
 
 
 
   @media screen and (max-width:600px) {
+    .book{
+      height:700px;
+    }
     .row-des{
         max-width: 300px;
         
@@ -154,29 +191,49 @@
     }
 
     .form-des{
-        float: none;
-        padding-top: 20px;
-        text-align: center;
-        margin-left: 10px;
-      }
-      /* .form-des input{
-          padding-top: 20px;
-      } */
-      .theatre{
-        float:none;
-        text-align: center;
-       padding-top:20px;
-       margin-left: 10px;
+      float: left;
+      padding-top: 20px;
+      text-align: center;
+      margin-left: 100px;
+    }
+  
+    .theatre{
+      float:none;
+      text-align: center;
+     padding-top:20px;
+     margin-left: 40px;
+     margin-top: 20px;
+    
+    }
+    .theatre select{
+      width:130px;
+    }
+    .show{
       
-      }
-      .show{
-        
-        float:none;
-        text-align: center;
-        padding-top:20px;
-        margin-left: 10px;
-      
-      }
+      float:none;
+      text-align: center;
+      padding-top:20px;
+      margin-left: 40px;
+    
+    }
+    .show select{
+      margin-left: 40px;
+    }
+    .dates{
+      float:none;
+      text-align: center;
+      padding-top:20px;
+      margin-left: 15px;
+      margin-bottom: 20px;
+
+    }
+    .dates input{
+      width:150px;
+    }
+   .sub-btn{
+
+     margin-left: 250px;
+   }
 
 
     
@@ -189,13 +246,10 @@
   @media screen and (min-width:600px) and (max-width:800px) {
     .row-des{
         max-width: 600px;
-        height: 500px;
-        
+        height: 500px;   
         font-size: 5px;
         margin-top: 0px;
-     
        
-        
     }
     .col-des{
         float:left;
@@ -214,36 +268,59 @@
     .card-img-top{
         height:250px;
         width:200px;
-       
-
+    
     }
     .property{
        text-align: center;
     }
-
     .form-des{
-        float: none;
-        margin-left:10px;
-        padding-top: 15px;
+      text-align: center;
+      margin-left: 80px;
+      padding-top: 20px;
+      float:left;
+ 
+  }
+    .form-group{
+      margin-top: 22px;
+      margin-left: 30px;
+    }
+    .movname-des{
+        color:darkslategray;
+    }
+    .theatre{
       
-      }
-      .theatre{
-        float: none;
-       padding-top:15px;
-       margin-left:10px;
-       text-align: center;
+        float:left; 
       
-      
-      }
-      .show{
-        
-        float:none;
+        padding-top: 20px;
+        margin-left: 20px;
+        text-align: center; 
+     
+
+    }
+    .show{
+        float:left;
+        padding-top: 20px;
+        margin-left: 20px;
         text-align: center;
-        margin-left:10px;
-        padding-top:15px;
-       
+
       
-      }
+
+    }
+    .dates{
+      float:left;
+      padding-top: 20px;
+      margin-left: 20px;
+      text-align: center;
+
+    }
+    .sub-btn{
+       display: inline-block;
+      margin-left: 230px; 
+      margin-top: 20px;
+      
+    }
+
+   
 
 
 
@@ -251,7 +328,7 @@
 }
 
 
-@media screen  and (min-width:801px) and (max-width:1100px){
+@media screen  and (min-width:801px) and (max-width:1200px){
     .property{
         text-align: center;
     }
@@ -262,6 +339,10 @@
         float:left;
    
     }
+    .form-group{
+      margin-top: 22px;
+      margin-left: 30px;
+    }
     .movname-des{
         color:darkslategray;
     }
@@ -270,57 +351,51 @@
         float:left; 
       
         padding-top: 20px;
-        margin-left: 30px;
+        margin-left: 20px;
         text-align: center; 
+     
 
     }
     .show{
         float:left;
         padding-top: 20px;
-        margin-left: 30px;
+        margin-left: 20px;
         text-align: center;
-       
-     
 
     }
+    .dates{
+      float:left;
+      padding-top: 20px;
+      margin-left: 25px;
+      text-align: center;
+
+    }
+    .sub-btn{
+       display: inline-block;
+      margin-left: 450px; 
+      margin-top: 20px;
+      
+    }
+    
     
 }
 /* modify*/
 
+/* 
 
-.form-group{
-  float: left;
-  margin-left: 60px;
-  margin-top: -1px;
-}
 .form-des{
   float: left;
   margin-left: 90px;
 }
-.theatre{
-  float:left;
-  margin-left:100px;
-  /* background-image: url('search-icon.png'); */
 
-}
 .show{
   
   float:left;
-  margin-left:100px;
+  margin-left:100px; */
 
-}.link{
-    text-align: center;
-    
-}
-.sub-btn {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 8px 15px;
-    width: 200px;
-    text-transform: uppercase;
-    text-align: center;
-    text-decoration: none;
-    display: inline;
-    font-size: 20px;
+/* } */
+.link{
+
+  text-align: center;
+  
 }

@@ -1,152 +1,93 @@
-
-
-import {React,Component} from 'react';
+import {React,Component, useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import './main.css'
+import avt from './assets/avatarimg.jpeg'
+import maj from './assets/majorimg.jpg'
+import { Button, Modal } from "react-bootstrap";
 import ReactDatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import addDays from 'date-fns/addDays'  
 import moment from 'moment';
+import {useAlert} from 'react-alert'
 
 
+function Main(){
 
-
-class Main extends Component {
-  constructor(props) {
+      const [moviesList,setMovieslist]=useState([])
+      const [ShowList,setShowlist]=useState([])
+     const [selected,setSelected]=useState([])
+     const[dateselected,setDateSelected]=useState([])
+ 
+     const [selectedmovieid,setSelectedmovieid]=useState([])
   
-    super(props);
-    this.state = {
-      moviesList:[],
-     
-      ShowList:[],
-     
-      optiontime:null,
-      selected:null,
-      datetimeselected:null,
-      dateselected:null,
-      selectedmovieid:null
-    
-    };
   
+const alert=useAlert();
 
-    if(localStorage.getItem("dateselected")){
-      this.setState({
-      dateselected:new Date(localStorage.getItem("dateselected"))
-    })
-  }
-
-    this.handleChange = this.handleChange.bind(this);
-    // this.handleDate=this.handleDate.bind(this);
-    this.onFormSubmit = this.onFormSubmit.bind(this);  
-    this.handleTheatre=this.handleTheatre.bind(this);
+  const handleChange=(event) =>{
     
-  }
-
-  handleChange(event) {
-    this.setState({value: event.target.value});
     let seat=event.target.value;
     localStorage.setItem('seats_wanted',seat)   
   }
   
-  
-
-clickMe(item){
-  localStorage.setItem('movie_name', item); 
-}
-setMovid(item){
-
+const setMovid=(item)=>{
+ 
   localStorage.setItem('movie_id',item.id);
   localStorage.setItem('movie_name', item.name);
-  this.setState({
-    selectedmovieid:item.id
-  })
+  setSelectedmovieid(item.id)
 }
 
-// handleDate(datetime) {  
-//   this.setState({  
-//     selecteddate: datetime
-//     // startDate: moment(datetime)
-//   })  
-  
-//   // const dateselected=moment(this.state.selecteddate).format('YYYY-MM-DD')
-//   // this.setState({
-//   //   newdatetime:da
-//   // })
-//   // localStorage.setItem("dateselected",dateselected)
-// } 
 
- async onFormSubmit (datetimefront) {  
+async function onFormSubmit(datetimefront) {  
  
-  
-  
-  const dateselected_str=moment(datetimefront).format('YYYY-MM-DD')
-  // localStorage.setItem("dateselected",dateselected)
-  this.setState({
-    dateselected: new Date(dateselected_str)
-    // theatreList: data3.theatre,
-    
-})
-localStorage.setItem("dateselected",dateselected_str)
+  var dateselected_str=moment(datetimefront).format('YYYY-MM-DD')
+      setDateSelected(new Date(dateselected_str))
+      localStorage.setItem("dateselected",dateselected_str)
  
-  const current_date= moment().format("YYYY-MM-DD")
+      var current_date= moment().format("YYYY-MM-DD")
 
   // checking for date and time 
   // if current date then time should be current time
   let timeselected=""
   if(current_date===dateselected_str){
      timeselected=moment().format("HH:mm:ss")
-
+    console.log(timeselected)
   }
   // if not current date then time should start 00:00:00
 
   else{
      timeselected='00:00:00'
- 
+    console.log(timeselected)
   }
 
   const datetimeselected=dateselected_str.concat(" ",timeselected)
-
+  console.log(datetimeselected)
   localStorage.setItem("datetimeselected",datetimeselected)
-  // this.setState({  
-  //   datetimeselected: datetimeselected,
-  // })  
+  
 
   const movieid=localStorage.getItem('movie_id')
-  // const datetime=localStorage.getItem("datetimeselected")
+  
   const res3=await fetch("http://127.0.0.1:5000/show/movieID/"+movieid+"/date/"+datetimeselected);
   const data3=await res3.json();
-   
-  // console.log(datetimefront.toString())
-  // localStorage.setItem("selecteddate",datetimefront.toString())
 
-  this.setState({
-    // dateselected: new Date(dateselected),
-    // theatreList: data3.theatre,
-    ShowList:data3.show
-})
+    setShowlist(data3.show)
 
 localStorage.setItem("showlist",JSON.stringify(data3.show));    
 
   
 } 
 
-handleTheatre(event) {
+const handleTheatre=(event) =>{
   let show=JSON.parse(event.target.value);
   let theatrename=show.theatre_name;
   let theatreid = show.theatre_id;
-  this.setState({  
-    selected: theatreid,
-  })  
+  setSelected(theatreid)
   localStorage.setItem('theatre_name',theatrename)
   localStorage.setItem('theatre_id',theatreid)   
 }
 
 
 
-
-
-
-handleTime(event) { 
+const handleTime=(event)=> { 
   let show=JSON.parse(event.target.value);
   let showtime=show.time;
   let showid = show.id;
@@ -154,30 +95,25 @@ handleTime(event) {
   localStorage.setItem('show_id',showid)   
 }
 
-async componentDidMount() {
-   
-  const res= await fetch("http://127.0.0.1:5000/movies");
-  const data=await res.json();
-// console.table(data.movies)
-  // const res2=await fetch("http://127.0.0.1:5000/theatre");
-  // const data1=await res2.json();
-//   const movieid=localStorage.getItem('movie_id')
-//   const datetime=localStorage.getItem("datetimeselected")
-//   const res3=await fetch("http://127.0.0.1:5000/show/movieID/"+movieid+"/date/"+datetime);
-//   const data3=await res3.json();
-   
-  this.setState({
-    moviesList: data.movies,
-    // theatreList: data3.theatre,
-    // ShowList:data3.show
-})
-// localStorage.setItem("showlist",this.state.ShowList);         
-}
+const getData = async () => {
+  try{
+    const res= await fetch("http://127.0.0.1:5000/movies");
+    const data=await res.json();
+    setMovieslist(data.movies)
+  }catch(error){
+    console.log(error) 
+  }
+};
+       
+
+useEffect(() => {
+ getData()
+  
+}, []);
 
 
 
-
-tConvert (time) {
+const tConvert =(time)=> {
   // Check correct time format and split into components
   time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
 
@@ -188,52 +124,79 @@ tConvert (time) {
   }
   return time.join (''); // return adjusted time or original string
 }
-
-
-
-render () {
  
-      // if(localStorage.getItem("selecteddate"))
-      // this.setState({
-      //   selecteddate:new Date(localStorage.getItem("selecteddate"))
-      // })
-      let shows = this.state.ShowList;
+      let shows =ShowList;
       if(localStorage.getItem("showlist") &&localStorage.getItem("showlist").length!==0 ){
         shows=JSON.parse(localStorage.getItem("showlist"))
-
       }
- 
+      let newshows=[]
+      for(let i=0;i<shows.length;i++){
+        newshows[i]=shows[i]
+      }
+     
+      let dups=new Set()
+       for(let i=0;i<newshows.length;i++){
+         let show=newshows[i]
+         
+         if(dups.has(show.theatre_name)){
+           newshows.splice(i,1)
+         }
+         dups.add(show.theatre_name)
+       }
+  
       
-      let optiontheatre = shows.map((show) =>
+      let optiontheatre = newshows.map((show) =>
               <option value={JSON.stringify(show)}>{show.theatre_name}</option>
           );
+   
               
         
-        
-            let optiontime = shows.filter((show) => show.theatre_id===this.state.selected).map((show) =>
-                            <option value={JSON.stringify(show)}>{this.tConvert(show.time)}</option>
+      let optiontime = shows.filter((show) => show.theatre_id===selected).map((show) =>
+                            <option value={JSON.stringify(show)}>{tConvert(show.time)}</option>
                         );  
 
+let mid= localStorage.getItem("movie_id")
+let ds=localStorage.getItem("dateselected")
+
+
+
+
+window.onbeforeunload = function(){
+  localStorage.removeItem("cart")
+  localStorage.removeItem("movie_name")
+  localStorage.removeItem("movie_id")
+  localStorage.removeItem("show_time")
+  localStorage.removeItem("show_id")
+  localStorage.removeItem("confirm")
+  localStorage.removeItem("theatre_name")
+  localStorage.removeItem("theatre_id")
+  localStorage.removeItem("seats_wanted")
+  localStorage.removeItem("price")
+  localStorage.removeItem("seatsSelected")
+  localStorage.removeItem("dateselected")
+  localStorage.removeItem("datetimeselected")
+  localStorage.removeItem("showlist") 
+
+}
         return (
       <>
          
           <div className='book'>
             <div className='movieselect'>
-               
+
 
               
           <div className='row-des'>
 
-              {this.state.moviesList.map((movie) => {
+              {moviesList.map((movie) => {
                
                 return(
                  
                   <div className="col-des"> 
 
 
-                 <div onClick={() => this.setMovid(movie)}  >
-                  
-                  <img src={movie.img} className="card-img-top" alt={movie.name} style={{ border: movie.id === this.state.selectedmovieid ? '5px solid red' : 'none'}}/>
+                 <div onClick={() => setMovid(movie)}  >
+                  <img src={movie.img} className="card-img-top" alt={movie.name} style={{ border: localStorage.getItem("movie_id") && (movie.id === selectedmovieid )? '5px solid red' : 'none'}}/>
                
                   <p className='movname-des'>{movie.name}</p>
                   </div>
@@ -245,89 +208,100 @@ render () {
 
           </div>
              
-       
-              
-             
-               
                 </div>
            
             
              <br/>
              
-    <div className='property'> 
- {/* <form onSubmit={ this.onFormSubmit }>  */}
- {/* <form >  */}
-        <div className="form-group">  
-        
-        <div>Select Date:</div>
+
+
       
-          <ReactDatePicker  
-              // selected={ this.state.dateselected }  
-              selected={localStorage.getItem("dateselected")
-                ? new Date(localStorage.getItem("dateselected"))
-                : new Date()}
-              onChange={this.onFormSubmit}
-              name="selectedDate"  
+
+    <div className='form-des'>
+    { mid ?
+    <>
+      <p className="form-group">  
+      
+{/*  
+           Select Dates */}
+          
+              <ReactDatePicker    
+                selected={localStorage.getItem("dateselected")
+                   ? new Date(localStorage.getItem("dateselected"))
+                   : null}
+              onChange={onFormSubmit}
+              name="selectedDate"
               placeholderText='Enter Date'
               dateFormat="yyyy-MM-dd"
               minDate={new Date()}
-              maxDate={addDays(new Date(), 5)} 
-          /> 
-                {/* <button className="btn">Select Date</button>     */}
-        </div>  
-    {/* </form>  */}
+              maxDate={addDays(new Date(), 2)} 
+              /> 
+        </p>  
+</>: null }
+
+{ds?
+
+<>
 
 
+{ ShowList.length>0   ?
+<>
+              <p className='theatre'>Theatre
+              <select onChange={handleTheatre} >
+              <option value="">Select Theatre</option>
+                {optiontheatre} 
+              </select>
+              </p>    
 
-    <div className='form-des'>
-      
-                <form onsubmit="return false"> Seats Needed
-                <input type="number" max={5} min={0} onChange={this.handleChange} 
+              <p className="show">Time
+              <select onChange={handleTime} >
+              <option value="">Select Time</option>
+                {optiontime} 
+              </select>
+              </p>
+             
+
+              <form  className='dates' onsubmit="return false">  Seats Needed
+                <input type="number" max={5} min={0} onChange={handleChange} 
                 value={localStorage.getItem("seats_wanted")?
                 localStorage.getItem("seats_wanted"):
                 0
                 } placeholder="Choose Seats" />
-                </form>
-                </div>
-              
-              <p className='theatre'>Theatre
-              <select onChange={this.handleTheatre} >
-              <option value="">Select Theatre</option>
-                {optiontheatre}
-                
-              </select>
-              </p>
+              </form>
+     
+ </>:<>
+ <div>Theatre not available</div>
+ </> }      
+ </>: null}
+ </div> 
+         
+   
 
-              <p className="show">Time
-              <select onChange={this.handleTime} >
-              <option value="">Select Time</option>
-                {optiontime}
-                
-              </select>
-              </p>
-    </div>
+    <br/>
+    <br/>
+    <br/>
 
-    <br></br>
-      <div className='link'>        
     <Link className='sub-btn'
              
      to={{
        pathname: '/seats',
-       state: this.state.value
-     }}> submit
-      </Link>
-      </div> 
-    </div>
-     
-        
        
+     }}> submit
+    </Link>
+    
 
+  
+</div>
+   
+    
       </>
       );
-    }
-  }       
+    
+  }      
     
   export default Main;
+
+
 
 
 

@@ -10,14 +10,23 @@ import { Link,useNavigate } from 'react-router-dom';
 const Home = () => {
   return (
     <div className='main-cont'>
-
+      
   
     <div className="bg-text">
-    <img src={img6}/>
+    <ul className="slideshow">
+	<li><span></span></li>
+  <li><span>2</span></li>
+	<li><span></span></li>
+	<li><span></span></li>
+    
+</ul>
+    
     <div className='centered'> 
-  
-    <p>Book  ticket of a movie<br/> and enjoy!  <br/> <br/> <Link className='book-btn' to="/main">Book now </Link> </p>
-    {/* <Link className='book-btn' to="/main">Book now</Link> */}
+     <p className='title'> <span className="title-word title-word-1">Book </span>
+    <span className="title-word title-word-2">movie </span>
+    <span className="title-word title-word-3">Ticket </span>
+    <br></br>
+    <span className="title-word title-word-4">and enjoy!</span><br/> <br/> <Link className='book-btn ' to="/main">Book now </Link> </p>
     </div>
     
   

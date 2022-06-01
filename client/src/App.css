@@ -113,7 +113,7 @@ h1{
   perspective: 1000px;
   margin-bottom: 30px;
 
-  height:720px;
+  height:100%;
 
   background-color:gainsboro;
   padding-top: 60px;
@@ -341,3 +341,17 @@ margin-bottom: 26px;
 }
 
 
+
+.selectedDate{
+  /* margin-left: 10rem;
+
+  margin-bottom: 100px; */
+  /* margin-top: 3px; */
+  margin-bottom: 100px;
+  margin-left: 100px;
+ 
+
+}
+.datename{
+  position: 90px;
+}

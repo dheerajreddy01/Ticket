@@ -6,12 +6,11 @@ import { Navigate,Outlet } from "react-router-dom";
 
 const useAuth=() =>{
     const res= localStorage.getItem("user")
-
+   
+    
     if(res){
     const user ={LoggedIn:true}
     const log=JSON.parse(res)
-    
-    console.log(log.name)
   
     return user && user.LoggedIn;
     }

@@ -1,7 +1,9 @@
 import React from 'react'
+import {  useNavigate } from 'react-router-dom';
 import './ticket.css'
 import moment from 'moment';
  function Ticket() {
+const navigate=useNavigate();
  let seats=localStorage.getItem("seats_wanted")
  let movie=localStorage.getItem("movie_name")
  let user=localStorage.getItem("user")

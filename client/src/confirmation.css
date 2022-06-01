@@ -302,3 +302,22 @@ select.on, textarea {
 
   
 }
+/* @media screen and (max-width:300px){
+  .conf{
+    height:500px;
+    width:100px;
+  }
+  .routes{
+    width: 80px;
+    margin-left: 10px;
+
+  }
+  .submit{
+    width:80px;
+    margin-top: 10px;
+    margin-left: 10px;
+
+  }
+
+  
+} */

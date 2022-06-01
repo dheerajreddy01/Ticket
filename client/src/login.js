@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {Link,useNavigate} from "react-router-dom"
 import { useAlert } from "react-alert";
+import "./login.css"
 function Login() {
     const [email, setEmaillog] = useState(" ");
     const [password, setPasswordlog] = useState(" ");
@@ -47,40 +48,43 @@ function Login() {
   }
   return (
    <>
-    <div className="login-page">
-        <form className="form" onSubmit={handleLogin}>
-
-        <div className="login">
-          <div className="login-header">
-            <h3>LOGIN</h3>
-          </div>
-        </div>
-          <div className="login-form">
+   <div className="login-box">
+   <div className="popup">
+  <div className="popup-image">
+    <img src="https://turkce-sozluk.com/api/src/astronot.jpg" alt="Login page image"/>
+  </div>
+    
+        <form className="signinForm" onSubmit={handleLogin}>
+        <h1 className="title">LOGIN</h1>
+          
             <input
+            className="login-input"
               type="email"
               placeholder="Enter email"
               required
               onChange={(event) => setEmaillog(event.target.value)}
             />
-          </div>
+          
 
-          <div className="login-form">
+          
             <input
+            className="login-input"
               type="password"
               placeholder="Enter password"
               required
               onChange={(event) => setPasswordlog(event.target.value)}
             />
-          </div>
-
-          <button>
-            Login
-          </button>
-          <Link to="/register">Don't Have an account?</Link>
+          <button className="login-btn">Sign in</button>
+          <div className="options">
+      <div>New Here? <a className="link" href="/register">Register</a></div>
+      </div>
+          {/* <Link to="/register">Don't Have an account?</Link> */}
           
       </form>
       
     </div>
+    </div>
+   
     </>
   );
 }
