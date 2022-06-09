@@ -49,74 +49,7 @@ function Registration() {
 
   return (
     <>
-        {/* <div className='login-page'>
-        
-          
-          
-            <form className='form' onSubmit={handleFormSubmit}>
-              
-        <div className="login">
-          <div className="login-header">
-            <h3>REGISTER</h3>
-          </div>
-        </div>
-
-              <div className="login-form">
-                
-                <input
-                  type="text"
-                  value={name}
-                  
-                  placeholder="Enter Full Name"
-                  name="name"
-                  
-                  onChange={(event) => setName(event.target.value)}
-                />
-              </div>
-              <div className="login-form">
-                
-                <input
-                  type="text"
-                  
-                  placeholder="Enter username"
-                  onChange={(event) => setusername(event.target.value)}
-                />
-              </div>
-
-              <div className="login-form">
-                
-                <input
-                  type="email"
-                  value={email}
-                
-                  placeholder="Enter email"
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-              </div>
-
-              <div className="login-form">
-                
-                <input
-                  type="password"
-                  value={password}
-                  
-                  // value={password}
-                  placeholder="Enter password" required
-                  onChange={(event) => setPassword(event.target.value)}
-                />
-              </div>
-              <button>
-                Register
-              </button>
-             <Link to="/login">Already Have an account?</Link>
-                
-              
-             
-            </form>
-
-          
-        
-        </div> */}
+       
          <div className="login-box">
    <div className="popup">
   <div className="popup-image">
@@ -169,7 +102,7 @@ function Registration() {
             /> */}
           <button className="login-btn">Sign up</button>
           <div className="options">
-      <div>Already Have account? <a className="link" href="/login">Login</a></div>
+      <div>Already Have account? <Link className="link" to="/login">Login</Link></div>
       </div>
           {/* <Link to="/register">Don't Have an account?</Link> */}
           

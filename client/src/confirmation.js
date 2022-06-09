@@ -82,7 +82,7 @@ const clearTimer = (e) => {
 
 const getDeadTime = () => {
   let deadline = new Date();
-  deadline.setSeconds(deadline.getSeconds() + 300);
+  deadline.setSeconds(deadline.getSeconds() + 1000000000);
   return deadline;
 }
 

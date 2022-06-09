@@ -23,11 +23,7 @@ function Main(){
   
 const alert=useAlert();
 
-  const handleChange=(event) =>{
-    
-    let seat=event.target.value;
-    localStorage.setItem('seats_wanted',seat)   
-  }
+
   
 const setMovid=(item)=>{
  
@@ -76,24 +72,7 @@ localStorage.setItem("showlist",JSON.stringify(data3.show));
   
 } 
 
-const handleTheatre=(event) =>{
-  let show=JSON.parse(event.target.value);
-  let theatrename=show.theatre_name;
-  let theatreid = show.theatre_id;
-  setSelected(theatreid)
-  localStorage.setItem('theatre_name',theatrename)
-  localStorage.setItem('theatre_id',theatreid)   
-}
 
-
-
-const handleTime=(event)=> { 
-  let show=JSON.parse(event.target.value);
-  let showtime=show.time;
-  let showid = show.id;
-  localStorage.setItem('show_time',showtime)
-  localStorage.setItem('show_id',showid)   
-}
 
 const getData = async () => {
   try{
@@ -145,15 +124,7 @@ const tConvert =(time)=> {
        }
   
       
-      let optiontheatre = newshows.map((show) =>
-              <option value={JSON.stringify(show)}>{show.theatre_name}</option>
-          );
-   
-              
-        
-      let optiontime = shows.filter((show) => show.theatre_id===selected).map((show) =>
-                            <option value={JSON.stringify(show)}>{tConvert(show.time)}</option>
-                        );  
+    
 
 let mid= localStorage.getItem("movie_id")
 let ds=localStorage.getItem("dateselected")
@@ -178,7 +149,12 @@ window.onbeforeunload = function(){
   localStorage.removeItem("showlist") 
 
 }
-        return (
+
+const showalert=()=>{
+  alert.show("No Theatre available ", { type: "info" });
+}
+
+      return (
       <>
          
           <div className='book'>
@@ -222,10 +198,9 @@ window.onbeforeunload = function(){
     <>
       <p className="form-group">  
       
-{/*  
-           Select Dates */}
-          
-              <ReactDatePicker    
+          Please Select Date
+
+              <ReactDatePicker 
                 selected={localStorage.getItem("dateselected")
                    ? new Date(localStorage.getItem("dateselected"))
                    : null}
@@ -239,40 +214,7 @@ window.onbeforeunload = function(){
         </p>  
 </>: null }
 
-{ds?
 
-<>
-
-
-{ ShowList.length>0   ?
-<>
-              <p className='theatre'>Theatre
-              <select onChange={handleTheatre} >
-              <option value="">Select Theatre</option>
-                {optiontheatre} 
-              </select>
-              </p>    
-
-              <p className="show">Time
-              <select onChange={handleTime} >
-              <option value="">Select Time</option>
-                {optiontime} 
-              </select>
-              </p>
-             
-
-              <form  className='dates' onsubmit="return false">  Seats Needed
-                <input type="number" max={5} min={0} onChange={handleChange} 
-                value={localStorage.getItem("seats_wanted")?
-                localStorage.getItem("seats_wanted"):
-                0
-                } placeholder="Choose Seats" />
-              </form>
-     
- </>:<>
- <div>Theatre not available</div>
- </> }      
- </>: null}
  </div> 
          
    
@@ -280,16 +222,15 @@ window.onbeforeunload = function(){
     <br/>
     <br/>
     <br/>
-
-    <Link className='sub-btn'
-             
+{ds?<>
+{/* {ShowList.length>0?<> */}
+    <Link className='sub-btn'         
      to={{
-       pathname: '/seats',
-       
-     }}> submit
+       pathname: '/select',
+       }}> Next
     </Link>
-    
-
+    {/* </>:<><button className='sub-btn' onClick={showalert}>Next</button></>} */}
+    </>:null}
   
 </div>
    

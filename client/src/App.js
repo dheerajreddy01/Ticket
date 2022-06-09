@@ -16,6 +16,7 @@ import Logout from './Logout'
 import Contact from './contact';
 import History from './History';
 import Ticket from './Ticket';
+import Main1 from './main1';
 // import { ToastContainer, toast } from 'react-toastify';
 //   import 'react-toastify/dist/ReactToastify.css';
 
@@ -39,9 +40,10 @@ function App() {
         <Route element ={<SubProtectedRoutes/>}>
         <Route path="/seats" element={<Seats/>}/>
         </Route>
-        <Route element ={<Protectedroutes1/>}>
+        <Route path="/select" element={<Main1/>}/>
+        {/* <Route element ={<Protectedroutes1/>}> */}
         <Route path="/confirmation" element={<Confirmation/>}/>
-        </Route>
+        {/* <    */}
         <Route path="/history" element={<History/>}/>
         <Route path="/ticket" element={<Ticket/>}/>
 

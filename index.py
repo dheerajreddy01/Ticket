@@ -762,6 +762,14 @@ def movie():
     return jsonify({'movies': list(map(lambda movies: movies.serialize(), Movie.query.all()))})
 
 
+@app.route("/movies/<int:id>",methods=['GET'])
+@cross_origin()
+def movie1(id):
+    movie = Movie.query.get(id)
+    return jsonify({'movies': movie.serialize()}), 201
+
+
+
 
 @app.route('/movies', methods=['POST'])
 @cross_origin()

@@ -76,7 +76,7 @@ function Login() {
             />
           <button className="login-btn">Sign in</button>
           <div className="options">
-      <div>New Here? <a className="link" href="/register">Register</a></div>
+      <div>New Here? <Link className="link" to="/register">Register</Link ></div>
       </div>
           {/* <Link to="/register">Don't Have an account?</Link> */}
           
